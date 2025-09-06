@@ -1,0 +1,64 @@
+# Development tools - 開発ツール固有ファイル
+.claude/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files - OS固有ファイル
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs - ログファイル
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependencies - 依存関係
+node_modules/
+bower_components/
+
+# Build outputs - ビルド成果物
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# Environment files - 環境設定ファイル
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cache directories - キャッシュディレクトリ
+.cache/
+.parcel-cache/
+.npm
+.eslintcache
+
+# Runtime files - ランタイムファイル
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul - カバレッジ
+coverage/
+.nyc_output/
+
+# Temporary folders - 一時フォルダ
+tmp/
+temp/
+
+# Editor backups - エディタバックアップ
+*~
+\#*\#
+.\#*
