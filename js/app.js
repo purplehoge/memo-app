@@ -133,6 +133,32 @@ function copyFromTemplate() {
     alert('テンプレートをコピーしました（現在日時付き）');
 }
 
+function addDateToMemo() {
+    const now = new Date();
+    const dateStr = now.getFullYear() + '/' + 
+                   String(now.getMonth() + 1).padStart(2, '0') + '/' + 
+                   String(now.getDate()).padStart(2, '0');
+    
+    const memoTextArea = document.getElementById('memoText');
+    let currentContent = memoTextArea.value;
+    
+    if (!currentContent.trim()) {
+        alert('メモの内容がありません');
+        return;
+    }
+    
+    // メモ内容のyyyy/mm/dd形式を当日日付で置換
+    const updatedContent = currentContent.replace(/yyyy\/mm\/dd/g, dateStr);
+    
+    if (updatedContent === currentContent) {
+        alert('yyyy/mm/dd の形式が見つかりませんでした');
+        return;
+    }
+    
+    memoTextArea.value = updatedContent;
+    alert('日付を更新しました: ' + dateStr);
+}
+
 function newMemo() {
     const now = new Date();
     const dateStr = now.getFullYear() + '/' + 
