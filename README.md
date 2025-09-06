@@ -21,14 +21,14 @@
 
 ### 1. ファイル取得
 ```bash
-# ファイルをダウンロードまたはコピー
-memo-app.html
+# リポジトリをクローンまたはダウンロード
+git clone https://github.com/purplehoge/memo-app.git
 ```
 
 ### 2. ブラウザで開く
 ```bash
 # ダブルクリックまたは右クリック→プログラムから開く
-memo-app.html をブラウザで開く
+index.html をブラウザで開く
 ```
 
 ## 利用方法
@@ -129,7 +129,17 @@ memo-app.html をブラウザで開く
 
 ### ファイル構成
 ```
-memo-app.html  # アプリケーション本体（HTML + CSS + JavaScript）
+├── index.html       # メインHTMLファイル
+├── css/
+│   └── style.css    # スタイルシート
+├── js/
+│   └── app.js       # アプリケーションロジック
+├── docs/
+│   ├── 01_要件定義.md
+│   ├── 02_基本設計.md
+│   └── 03_詳細設計.md
+├── README.md        # このファイル
+└── CLAUDE.md        # 開発方針
 ```
 
 ### データ形式
@@ -145,11 +155,11 @@ memo-app.html  # アプリケーション本体（HTML + CSS + JavaScript）
 ## 開発・カスタマイズ
 
 ### ファイル構造
-```html
-memo-app.html
+```
+index.html
 ├─ HTML: アプリケーション構造
-├─ CSS: スタイリング（Flexboxベース）
-└─ JavaScript: アプリケーションロジック
+├─ css/style.css: スタイリング（Flexboxベース）
+└─ js/app.js: アプリケーションロジック
 ```
 
 ### 主要な関数
@@ -169,6 +179,10 @@ memo-app.html
 
 ## 更新履歴
 
+- **v1.1.0** (2025-09-06): ファイル構成改善とバグ修正
+  - テンプレートコピー後の選択状態保持機能追加
+  - HTMLとJavaScriptファイル分離（可読性向上）
+  - フォルダ構成の整理
 - **v1.0.0** (2025-09-06): 初回リリース
   - テンプレート保存・読み込み機能
   - 日付自動挿入機能
