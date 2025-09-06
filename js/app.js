@@ -114,23 +114,9 @@ function copyFromTemplate() {
         return;
     }
     
-    const now = new Date();
-    const dateStr = now.getFullYear() + '/' + 
-                   String(now.getMonth() + 1).padStart(2, '0') + '/' + 
-                   String(now.getDate()).padStart(2, '0');
-    const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
-                   String(now.getMinutes()).padStart(2, '0');
-    
-    let templateContent = templates[selectedTemplate];
-    
-    // yyyy/mm/dd形式の文言を当日日付で置換
-    templateContent = templateContent.replace(/\d{4}\/\d{2}\/\d{2}/g, dateStr);
-    
-    // 現在日時を付加してコピー
-    const newContent = `${dateStr} ${timeStr}\n\n${templateContent}`;
-    
-    document.getElementById('memoText').value = newContent;
-    alert('テンプレートをコピーしました（現在日時付き）');
+    const templateContent = templates[selectedTemplate];
+    document.getElementById('memoText').value = templateContent;
+    alert('テンプレートをコピーしました');
 }
 
 function addDateToMemo() {
@@ -138,6 +124,8 @@ function addDateToMemo() {
     const dateStr = now.getFullYear() + '/' + 
                    String(now.getMonth() + 1).padStart(2, '0') + '/' + 
                    String(now.getDate()).padStart(2, '0');
+    const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
+                   String(now.getMinutes()).padStart(2, '0');
     
     const memoTextArea = document.getElementById('memoText');
     let currentContent = memoTextArea.value;
@@ -151,12 +139,15 @@ function addDateToMemo() {
     const updatedContent = currentContent.replace(/yyyy\/mm\/dd/g, dateStr);
     
     if (updatedContent === currentContent) {
-        alert('yyyy/mm/dd の形式が見つかりませんでした');
-        return;
+        // yyyy/mm/ddが見つからない場合は、先頭に日付・時刻を付加
+        const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
+        memoTextArea.value = finalContent;
+        alert('先頭に日付・時刻を追加しました: ' + dateStr + ' ' + timeStr);
+    } else {
+        // yyyy/mm/ddが見つかった場合は置換のみ
+        memoTextArea.value = updatedContent;
+        alert('yyyy/mm/dd を日付に置換しました: ' + dateStr);
     }
-    
-    memoTextArea.value = updatedContent;
-    alert('日付を更新しました: ' + dateStr);
 }
 
 function newMemo() {
