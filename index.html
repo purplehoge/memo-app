@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メモ帳アプリ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 メモ帳アプリ</h1>
+        </div>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="template-section">
+                    <h3>テンプレート</h3>
+                    
+                    <input type="text" id="templateName" placeholder="テンプレート名を入力">
+                    
+                    <div class="template-controls">
+                        <button class="btn btn-success" onclick="saveTemplate()">保存</button>
+                        <button class="btn btn-danger" onclick="deleteTemplate()">削除</button>
+                    </div>
+                    
+                    <div class="template-list" id="templateList">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="memo-area">
+                <div class="date-info" id="dateInfo"></div>
+                
+                <div class="memo-controls">
+                    <button class="btn btn-success" onclick="newMemo()">新規メモ</button>
+                    <button class="btn btn-secondary" onclick="clearMemo()">クリア</button>
+                    <button class="btn" onclick="copyFromTemplate()">テンプレートからコピー</button>
+                </div>
+                
+                <textarea id="memoText" placeholder="ここにメモを入力してください..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
