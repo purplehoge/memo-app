@@ -108,17 +108,6 @@ function deleteTemplate() {
     }
 }
 
-function copyFromTemplate() {
-    if (!selectedTemplate) {
-        alert('コピーするテンプレートを選択してください');
-        return;
-    }
-    
-    const templateContent = templates[selectedTemplate];
-    document.getElementById('memoText').value = templateContent;
-    alert('テンプレートをコピーしました');
-}
-
 function addDateToMemo() {
     const now = new Date();
     const dateStr = now.getFullYear() + '/' + 
