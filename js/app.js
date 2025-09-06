@@ -118,14 +118,19 @@ function copyFromTemplate() {
     const dateStr = now.getFullYear() + '/' + 
                    String(now.getMonth() + 1).padStart(2, '0') + '/' + 
                    String(now.getDate()).padStart(2, '0');
+    const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
+                   String(now.getMinutes()).padStart(2, '0');
     
-    const templateContent = templates[selectedTemplate];
-    const newContent = `${dateStr}\n\n${templateContent}`;
+    let templateContent = templates[selectedTemplate];
+    
+    // yyyy/mm/dd形式の文言を当日日付で置換
+    templateContent = templateContent.replace(/\d{4}\/\d{2}\/\d{2}/g, dateStr);
+    
+    // 現在日時を付加してコピー
+    const newContent = `${dateStr} ${timeStr}\n\n${templateContent}`;
     
     document.getElementById('memoText').value = newContent;
-    // 修正: テンプレート選択状態を維持
-    // selectedTemplate と templateName の値はそのまま保持
-    alert('テンプレートをコピーしました。同じテンプレートを再利用できます。');
+    alert('テンプレートをコピーしました（現在日時付き）');
 }
 
 function newMemo() {
@@ -133,11 +138,43 @@ function newMemo() {
     const dateStr = now.getFullYear() + '/' + 
                    String(now.getMonth() + 1).padStart(2, '0') + '/' + 
                    String(now.getDate()).padStart(2, '0');
+    const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
+                   String(now.getMinutes()).padStart(2, '0');
     
-    document.getElementById('memoText').value = dateStr + '\n\n';
+    document.getElementById('memoText').value = `${dateStr} ${timeStr}\n\n`;
     document.getElementById('templateName').value = '';
     selectedTemplate = null;
     renderTemplateList();
+}
+
+function copyToClipboard() {
+    const memoText = document.getElementById('memoText').value;
+    
+    if (!memoText.trim()) {
+        alert('コピーするメモの内容がありません');
+        return;
+    }
+    
+    navigator.clipboard.writeText(memoText)
+        .then(() => {
+            alert('📋 クリップボードにコピーしました');
+        })
+        .catch(err => {
+            console.error('クリップボードコピーエラー:', err);
+            // フォールバック機能
+            const textArea = document.createElement('textarea');
+            textArea.value = memoText;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('📋 クリップボードにコピーしました');
+            } catch (fallbackErr) {
+                alert('コピーに失敗しました');
+            }
+            document.body.removeChild(textArea);
+        });
 }
 
 function clearMemo() {
