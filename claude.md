@@ -214,6 +214,64 @@
 
 ---
 
+## 新規プロジェクト開始時の注意事項
+
+### 開発環境の継承
+- **GitHub CLI認証**: 既に設定済み（`gh auth login --with-token`完了）
+- **自動化スクリプト**: `scripts/create-pr.ps1` を新プロジェクトにコピー可能
+- **開発フロー**: 修正ブランチ → プルリクエスト → マージの手順は共通
+
+### 新規プロジェクト用の準備
+- **新フォルダ**: 新規プロジェクト用のフォルダを作成
+- **CLAUDE.md**: この内容をコピーして新プロジェクトのルートに配置
+- **GitHub リポジトリ**: `gh repo create` で新規作成
+- **デプロイ**: Vercelアカウント設定済み（GitHub連携完了）
+
+### Vercelデプロイ設定
+- **連携**: GitHubアカウントとの連携完了
+- **自動デプロイ**: GitHubプッシュでVercel自動更新
+- **プレビュー**: プルリクエスト毎にプレビューURL生成
+
+### Gitリポジトリ管理のベストプラクティス
+
+#### .gitignoreの必須設定
+```gitignore
+# Development tools - 開発ツール固有ファイル
+.claude/
+.vscode/
+.idea/
+
+# OS generated files - OS固有ファイル
+.DS_Store
+Thumbs.db
+
+# Environment files - 環境設定ファイル（機密情報）
+.env
+.env.local
+
+# Dependencies - 依存関係（容量大）
+node_modules/
+
+# Build outputs - ビルド成果物
+dist/
+build/
+```
+
+#### ファイル管理の原則
+- **アップすべきファイル**: ソースコード、設定ファイル、ドキュメント
+- **アップしないファイル**: 開発環境依存、機密情報、ビルド成果物、大容量ファイル
+- **CLAUDE.md**: プロジェクト共通ルールなら含める、個人メモなら除外
+
+#### コミット前のチェック習慣
+```bash
+# コミット前の確認
+git status          # 変更ファイル確認
+git diff            # 差分確認  
+git add <specific>  # 必要なファイルのみ追加
+```
+
+---
+
 ## 付録: Claude への依頼テンプレート
 ```
 目的:
