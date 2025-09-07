@@ -137,17 +137,25 @@ function addDateToMemo() {
     }
     
     // メモ内容のyyyy/mm/dd形式を当日日付で置換
-    const updatedContent = currentContent.replace(/yyyy\/mm\/dd/g, dateStr);
+    let updatedContent = currentContent.replace(/yyyy\/mm\/dd/g, dateStr);
     
-    if (updatedContent === currentContent) {
-        // yyyy/mm/ddが見つからない場合は、先頭に日付・時刻を付加
+    // mm/dd形式の日付を当日の月/日で置換（0埋めなし）
+    const monthDay = String(now.getMonth() + 1) + '/' + String(now.getDate());
+    const mmddReplaced = updatedContent.replace(/\b\d{1,2}\/\d{1,2}\b/g, monthDay);
+    
+    if (mmddReplaced !== updatedContent) {
+        // mm/dd形式が見つかった場合
+        memoTextArea.value = mmddReplaced;
+        alert('mm/dd を日付に置換しました: ' + monthDay);
+    } else if (updatedContent !== currentContent) {
+        // yyyy/mm/ddのみが見つかった場合
+        memoTextArea.value = updatedContent;
+        alert('yyyy/mm/dd を日付に置換しました: ' + dateStr);
+    } else {
+        // どちらも見つからない場合は、先頭に日付・時刻を付加
         const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
         memoTextArea.value = finalContent;
         alert('先頭に日付・時刻を追加しました: ' + dateStr + ' ' + timeStr);
-    } else {
-        // yyyy/mm/ddが見つかった場合は置換のみ
-        memoTextArea.value = updatedContent;
-        alert('yyyy/mm/dd を日付に置換しました: ' + dateStr);
     }
 }
 
