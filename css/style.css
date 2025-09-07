@@ -16,6 +16,23 @@
     --danger-hover: #c53030;
     --secondary-color: #805ad5;
     --secondary-hover: #6b46c1;
+    
+    /* シニア世代対応設定 */
+    --base-font-size: 16px;
+    --large-font-size: 18px;
+    --button-font-size: 18px;
+    --header-font-size: 24px;
+    --min-touch-target: 48px;
+    --mobile-button-height: 56px;
+    --mobile-input-height: 48px;
+    --high-contrast-ratio: 4.5; /* WCAG AA準拠 */
+    --hover-transition: 0.2s ease;
+    --focus-outline-color: #f59e0b;
+    --focus-outline-width: 3px;
+    
+    /* 高コントラスト色（WCAG AA準拠） */
+    --text-high-contrast: #1a1a1a;
+    --background-high-contrast: #ffffff;
 }
 
 * {
@@ -23,11 +40,13 @@
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', 'Helvetica Neue', Arial, sans-serif;
+    font-size: var(--base-font-size);
+    line-height: 1.6;
     margin: 0;
     padding: 20px;
     background: linear-gradient(135deg, var(--very-light-purple) 0%, var(--purple-gray) 100%);
-    color: var(--text-dark);
+    color: var(--text-high-contrast);
     min-height: 100vh;
 }
 
@@ -51,7 +70,8 @@ body {
 
 .header h1 {
     margin: 0;
-    font-size: 28px;
+    font-size: var(--header-font-size);
+    font-weight: 600;
 }
 
 .main-content {
@@ -77,20 +97,34 @@ body {
     background: var(--primary-purple);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
+    min-height: var(--min-touch-target);
+    min-width: var(--min-touch-target);
     border-radius: 8px;
     cursor: pointer;
     margin: 5px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    font-size: var(--button-font-size);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: var(--hover-transition);
     box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+    position: relative;
 }
 
 .btn:hover {
     background: var(--primary-purple-dark);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.btn:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
 }
 
 .btn-success {
@@ -129,19 +163,21 @@ textarea {
     border: 2px solid var(--border-purple);
     border-radius: 12px;
     padding: 15px;
-    font-size: 14px;
-    font-family: 'Courier New', monospace;
+    font-size: var(--base-font-size);
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', monospace;
+    line-height: 1.6;
     resize: vertical;
     outline: none;
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--text-dark);
+    background: var(--background-high-contrast);
+    color: var(--text-high-contrast);
     transition: all 0.3s ease;
 }
 
 textarea:focus {
     border-color: var(--primary-purple);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: 2px;
 }
 
 .memo-controls {
@@ -208,50 +244,146 @@ textarea:focus {
 
 input[type="text"] {
     width: 100%;
-    padding: 10px 14px;
+    padding: 12px 16px;
+    min-height: var(--mobile-input-height);
     border: 2px solid var(--border-purple);
     border-radius: 8px;
     margin-bottom: 10px;
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--text-dark);
+    font-size: var(--base-font-size);
+    background: var(--background-high-contrast);
+    color: var(--text-high-contrast);
     transition: all 0.3s ease;
 }
 
 input[type="text"]:focus {
     border-color: var(--primary-purple);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: 2px;
 }
 
 .date-info {
     text-align: center;
-    padding: 12px;
+    padding: 16px;
     background: var(--light-purple);
     border-radius: 12px;
     margin-bottom: 15px;
+    font-size: var(--large-font-size);
     font-weight: 600;
     color: var(--primary-purple-dark);
     border: 1px solid var(--border-purple);
 }
 
+/* スマートフォン（シニア対応強化） */
 @media (max-width: 768px) {
+    body {
+        padding: 8px;
+        font-size: var(--base-font-size);
+    }
+    
+    .container {
+        border-radius: 12px;
+    }
+    
+    .header h1 {
+        font-size: 22px;
+        padding: 16px;
+    }
+    
     .main-content {
         flex-direction: column;
+        min-height: 60vh;
     }
     
     .sidebar {
         width: 100%;
         border-right: none;
         border-bottom: 2px solid var(--border-purple);
+        order: 1; /* テンプレート選択を上部に */
+        padding: 16px;
     }
     
-    body {
-        padding: 10px;
+    .memo-area {
+        order: 2;
+        padding: 16px;
     }
     
-    .container {
-        border-radius: 12px;
+    /* シニア向け大きなタッチターゲット */
+    .btn {
+        min-height: var(--mobile-button-height);
+        font-size: var(--button-font-size);
+        padding: 16px 24px;
+        margin: 8px 4px;
+    }
+    
+    input[type="text"] {
+        min-height: var(--mobile-input-height);
+        padding: 16px;
+        font-size: var(--base-font-size);
+    }
+    
+    textarea {
+        height: 300px;
+        font-size: var(--base-font-size);
+        padding: 16px;
+    }
+    
+    .memo-controls {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+    
+    .template-item {
+        padding: 16px;
+        font-size: var(--base-font-size);
+    }
+    
+    .template-name {
+        font-size: var(--large-font-size);
+        margin-bottom: 8px;
+    }
+    
+    .template-preview {
+        font-size: var(--base-font-size);
+        color: var(--text-medium);
+    }
+}
+
+/* タブレット */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .main-content {
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .sidebar {
+        width: 300px;
+    }
+    
+    /* タッチターゲットサイズ維持 */
+    .btn {
+        min-height: var(--min-touch-target);
+    }
+    
+    input[type="text"], textarea {
+        font-size: var(--base-font-size);
+    }
+}
+
+/* 大画面でのアクセシビリティ配慮 */
+@media (min-width: 1025px) {
+    .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .sidebar {
+        width: 350px;
+    }
+    
+    /* フォーカス表示を大きめに */
+    .btn:focus, input:focus, textarea:focus {
+        outline-width: var(--focus-outline-width);
     }
 }
