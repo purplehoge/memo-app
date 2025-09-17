@@ -138,13 +138,13 @@ function addDateToMemo() {
     
     // mm/dd形式の日付を当日の月/日で置換（0埋めなし）
     const monthDay = String(now.getMonth() + 1) + '/' + String(now.getDate());
-    // mm/ddのリテラル文字列も含めて置換対象とする
+    // mm/ddのリテラル文字列のみ置換（数字日付は対象外）
     let mmddReplaced = currentContent.replace(/\bmm\/dd\b/g, monthDay);
-    // 数字のmm/dd形式も置換
-    mmddReplaced = mmddReplaced.replace(/\b\d{1,2}\/\d{1,2}\b/g, monthDay);
     
-    // メモ内容のyyyy/mm/dd形式を当日日付で置換
-    let updatedContent = mmddReplaced.replace(/yyyy\/mm\/dd/g, dateStr);
+    // yyyy/mm/dd形式の各プレースホルダを置換
+    let updatedContent = mmddReplaced.replace(/yyyy/g, now.getFullYear())
+                                    .replace(/mm/g, String(now.getMonth() + 1).padStart(2, '0'))
+                                    .replace(/dd/g, String(now.getDate()).padStart(2, '0'));
     
     if (mmddReplaced !== currentContent) {
         // mm/dd形式が見つかった場合
