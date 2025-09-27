@@ -138,13 +138,11 @@ function addDateToMemo() {
     
     // mm/dd形式の日付を当日の月/日で置換（0埋めなし）
     const monthDay = String(now.getMonth() + 1) + '/' + String(now.getDate());
-    // mm/ddのリテラル文字列のみ置換（数字日付は対象外）
-    let mmddReplaced = currentContent.replace(/\bmm\/dd\b/g, monthDay);
+    // mm/ddのリテラル文字列のみ置換（独立した単語として存在する場合のみ）
+    let mmddReplaced = currentContent.replace(/(?:^|(?<=\s))mm\/dd(?=\s|$)/gm, monthDay);
     
-    // yyyy/mm/dd形式の各プレースホルダを置換
-    let updatedContent = mmddReplaced.replace(/yyyy/g, now.getFullYear())
-                                    .replace(/mm/g, String(now.getMonth() + 1).padStart(2, '0'))
-                                    .replace(/dd/g, String(now.getDate()).padStart(2, '0'));
+    // yyyy/mm/dd形式の完全パターン置換
+    let updatedContent = mmddReplaced.replace(/(?:^|(?<=\s))yyyy\/mm\/dd(?=\s|$)/gm, dateStr);
     
     if (mmddReplaced !== currentContent) {
         // mm/dd形式が見つかった場合
@@ -155,10 +153,19 @@ function addDateToMemo() {
         memoTextArea.value = updatedContent;
         alert('yyyy/mm/dd を日付に置換しました: ' + dateStr);
     } else {
-        // どちらも見つからない場合は、先頭に日付・時刻を付加
-        const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
-        memoTextArea.value = finalContent;
-        alert('先頭に日付・時刻を追加しました: ' + dateStr + ' ' + timeStr);
+        // プレースホルダが見つからない場合
+        // 既存の日付パターン（YYYY/MM/DD、YYYY-MM-DD、MM/DD）をチェック
+        const hasExistingDate = /\d{4}\/\d{1,2}\/\d{1,2}|\d{4}-\d{1,2}-\d{1,2}|\d{1,2}\/\d{1,2}/.test(currentContent);
+
+        if (hasExistingDate) {
+            // 既存の日付がある場合は何もしない
+            alert('既存の日付が検出されたため、日付の追加は行いません');
+        } else {
+            // 日付がない場合のみ、先頭に日付・時刻を付加
+            const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
+            memoTextArea.value = finalContent;
+            alert('先頭に日付・時刻を追加しました: ' + dateStr + ' ' + timeStr);
+        }
     }
 }
 
