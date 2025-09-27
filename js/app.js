@@ -153,10 +153,19 @@ function addDateToMemo() {
         memoTextArea.value = updatedContent;
         alert('yyyy/mm/dd を日付に置換しました: ' + dateStr);
     } else {
-        // どちらも見つからない場合は、先頭に日付・時刻を付加
-        const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
-        memoTextArea.value = finalContent;
-        alert('先頭に日付・時刻を追加しました: ' + dateStr + ' ' + timeStr);
+        // プレースホルダが見つからない場合
+        // 既存の日付パターン（YYYY/MM/DD、YYYY-MM-DD、MM/DD）をチェック
+        const hasExistingDate = /\d{4}\/\d{1,2}\/\d{1,2}|\d{4}-\d{1,2}-\d{1,2}|\d{1,2}\/\d{1,2}/.test(currentContent);
+
+        if (hasExistingDate) {
+            // 既存の日付がある場合は何もしない
+            alert('既存の日付が検出されたため、日付の追加は行いません');
+        } else {
+            // 日付がない場合のみ、先頭に日付・時刻を付加
+            const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
+            memoTextArea.value = finalContent;
+            alert('先頭に日付・時刻を追加しました: ' + dateStr + ' ' + timeStr);
+        }
     }
 }
 
