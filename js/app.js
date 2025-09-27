@@ -141,10 +141,8 @@ function addDateToMemo() {
     // mm/ddのリテラル文字列のみ置換（独立した単語として存在する場合のみ）
     let mmddReplaced = currentContent.replace(/(?:^|(?<=\s))mm\/dd(?=\s|$)/gm, monthDay);
     
-    // yyyy/mm/dd形式の各プレースホルダを置換
-    let updatedContent = mmddReplaced.replace(/yyyy/g, now.getFullYear())
-                                    .replace(/mm/g, String(now.getMonth() + 1).padStart(2, '0'))
-                                    .replace(/dd/g, String(now.getDate()).padStart(2, '0'));
+    // yyyy/mm/dd形式の完全パターン置換
+    let updatedContent = mmddReplaced.replace(/(?:^|(?<=\s))yyyy\/mm\/dd(?=\s|$)/gm, dateStr);
     
     if (mmddReplaced !== currentContent) {
         // mm/dd形式が見つかった場合
