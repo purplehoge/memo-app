@@ -1,10 +1,19 @@
 let templates = {};
 let selectedTemplate = null;
+let selectedTemplates = new Set(); // 複数選択用（新機能）
+
+// ローカルストレージキー定数
+const STORAGE_KEYS = {
+    TEMPLATES: 'memoAppTemplates',
+    SELECTED_TEMPLATES: 'memoAppSelectedTemplates'
+};
 
 function init() {
     loadTemplates();
+    selectedTemplates = loadSelectedTemplates(); // 選択状態復元
     updateDateInfo();
     renderTemplateList();
+    renderSelectedTemplateBoxes(); // 選択済みテンプレートボックス描画
     setupAccessibility();
     setupKeyboardNavigation();
     optimizeTouchEvents();
@@ -20,7 +29,7 @@ function updateDateInfo() {
 }
 
 function loadTemplates() {
-    const saved = localStorage.getItem('memoAppTemplates');
+    const saved = localStorage.getItem(STORAGE_KEYS.TEMPLATES);
     if (saved) {
         try {
             templates = JSON.parse(saved);
@@ -31,42 +40,91 @@ function loadTemplates() {
     }
 }
 
+/**
+ * 選択状態をローカルストレージから復元する
+ * @returns {Set<string>} 選択済みテンプレート名の集合
+ */
+function loadSelectedTemplates() {
+    const saved = localStorage.getItem(STORAGE_KEYS.SELECTED_TEMPLATES);
+    if (saved) {
+        try {
+            return new Set(JSON.parse(saved));
+        } catch (error) {
+            console.error('選択状態の読み込みに失敗:', error);
+            return new Set();
+        }
+    }
+    return new Set();
+}
+
 function saveTemplates() {
     try {
-        localStorage.setItem('memoAppTemplates', JSON.stringify(templates));
+        localStorage.setItem(STORAGE_KEYS.TEMPLATES, JSON.stringify(templates));
     } catch (error) {
         console.error('テンプレート保存エラー:', error);
         alert('データの保存に失敗しました: ' + error.message);
     }
 }
 
+/**
+ * 選択状態をローカルストレージに保存する
+ */
+function saveSelectedTemplates() {
+    try {
+        localStorage.setItem(STORAGE_KEYS.SELECTED_TEMPLATES,
+                           JSON.stringify(Array.from(selectedTemplates)));
+    } catch (error) {
+        console.error('選択状態保存エラー:', error);
+    }
+}
+
 function renderTemplateList() {
     const list = document.getElementById('templateList');
     list.innerHTML = '';
-    
+
     Object.keys(templates).forEach(name => {
         const item = document.createElement('div');
         item.className = 'template-item';
-        item.onclick = () => selectTemplate(name);
-        
+
+        // チェックボックス作成
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'template-checkbox';
+        checkbox.checked = selectedTemplates.has(name);
+        checkbox.onchange = () => toggleTemplateSelection(name);
+
+        // チェックボックスラベル作成
+        const label = document.createElement('label');
+        label.className = 'template-checkbox-label';
+
         const nameDiv = document.createElement('div');
         nameDiv.className = 'template-name';
         nameDiv.textContent = name;
-        
+        nameDiv.onclick = () => selectTemplate(name); // 既存互換性維持
+
         const previewDiv = document.createElement('div');
         previewDiv.className = 'template-preview';
-        const preview = templates[name].length > 50 ? 
-                       templates[name].substring(0, 50) + '...' : 
+        const preview = templates[name].length > 50 ?
+                       templates[name].substring(0, 50) + '...' :
                        templates[name];
         previewDiv.textContent = preview;
-        
-        item.appendChild(nameDiv);
+
+        // 要素組み立て
+        label.appendChild(checkbox);
+        label.appendChild(nameDiv);
+        item.appendChild(label);
         item.appendChild(previewDiv);
-        
+
+        // 既存選択状態の表示（単一選択）
         if (selectedTemplate === name) {
             item.classList.add('selected');
         }
-        
+
+        // チェック状態の表示
+        if (selectedTemplates.has(name)) {
+            item.classList.add('checked');
+        }
+
         list.appendChild(item);
     });
 }
@@ -76,6 +134,201 @@ function selectTemplate(name) {
     document.getElementById('templateName').value = name;
     document.getElementById('memoText').value = templates[name];
     renderTemplateList();
+}
+
+/**
+ * テンプレートのチェック状態を切り替える
+ * @param {string} templateName - 対象テンプレート名
+ */
+function toggleTemplateSelection(templateName) {
+    if (selectedTemplates.has(templateName)) {
+        selectedTemplates.delete(templateName);
+    } else {
+        selectedTemplates.add(templateName);
+    }
+
+    // 状態保存と表示更新
+    saveSelectedTemplates();
+    renderTemplateList();
+    renderSelectedTemplateBoxes();
+}
+
+/**
+ * 選択済みテンプレートのテキストボックス群を描画する
+ */
+function renderSelectedTemplateBoxes() {
+    const container = document.getElementById('selectedTemplateBoxes');
+    container.innerHTML = '';
+
+    selectedTemplates.forEach(templateName => {
+        // 存在しないテンプレートはスキップ
+        if (!templates[templateName]) {
+            return;
+        }
+
+        // テンプレートボックスコンテナ作成
+        const boxContainer = document.createElement('div');
+        boxContainer.className = 'template-box-container';
+        boxContainer.setAttribute('data-template', templateName);
+
+        // テンプレート名ヘッダー
+        const header = document.createElement('h4');
+        header.className = 'template-box-header';
+        header.textContent = `📝 ${templateName}`;
+
+        // テキストエリア作成
+        const textArea = document.createElement('textarea');
+        textArea.className = 'template-box-textarea';
+        textArea.id = `template-box-${templateName}`;
+        textArea.value = templates[templateName];
+        textArea.placeholder = `${templateName}の内容を編集...`;
+
+        // ボタンコンテナ作成
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'template-box-buttons';
+
+        // 日付付与ボタン
+        const dateButton = document.createElement('button');
+        dateButton.className = 'btn btn-secondary template-box-btn';
+        dateButton.textContent = '📅 日付付与';
+        dateButton.onclick = () => addDateToTemplateBox(templateName);
+
+        // クリップボードコピーボタン
+        const copyButton = document.createElement('button');
+        copyButton.className = 'btn btn-primary template-box-btn';
+        copyButton.textContent = '📋 コピー';
+        copyButton.onclick = () => copyTemplateToClipboard(templateName);
+
+        // 保存ボタン
+        const saveButton = document.createElement('button');
+        saveButton.className = 'btn btn-success template-box-btn';
+        saveButton.textContent = '💾 保存';
+        saveButton.onclick = () => saveIndividualTemplate(templateName);
+
+        // ボタンをコンテナに追加
+        buttonContainer.appendChild(dateButton);
+        buttonContainer.appendChild(copyButton);
+        buttonContainer.appendChild(saveButton);
+
+        // 要素組み立て
+        boxContainer.appendChild(header);
+        boxContainer.appendChild(textArea);
+        boxContainer.appendChild(buttonContainer);
+
+        container.appendChild(boxContainer);
+    });
+}
+
+/**
+ * 指定テンプレートボックスに日付を付与する
+ * @param {string} templateName - 対象テンプレート名
+ */
+function addDateToTemplateBox(templateName) {
+    const textArea = document.getElementById(`template-box-${templateName}`);
+    if (!textArea) {
+        alert('テンプレートボックスが見つかりません');
+        return;
+    }
+
+    const now = new Date();
+    const dateStr = now.getFullYear() + '/' +
+                   String(now.getMonth() + 1).padStart(2, '0') + '/' +
+                   String(now.getDate()).padStart(2, '0');
+    const timeStr = String(now.getHours()).padStart(2, '0') + ':' +
+                   String(now.getMinutes()).padStart(2, '0');
+
+    let currentContent = textArea.value;
+
+    if (!currentContent.trim()) {
+        alert('テンプレートの内容がありません');
+        return;
+    }
+
+    // 既存の日付付与ロジックを流用
+    const monthDay = String(now.getMonth() + 1) + '/' + String(now.getDate());
+    let mmddReplaced = currentContent.replace(/(?:^|(?<=\s))mm\/dd(?=\s|$)/gm, monthDay);
+    let updatedContent = mmddReplaced.replace(/(?:^|(?<=\s))yyyy\/mm\/dd(?=\s|$)/gm, dateStr);
+
+    if (mmddReplaced !== currentContent) {
+        textArea.value = updatedContent;
+        alert(`${templateName}のmm/dd を日付に置換しました: ${monthDay}`);
+    } else if (updatedContent !== mmddReplaced) {
+        textArea.value = updatedContent;
+        alert(`${templateName}のyyyy/mm/dd を日付に置換しました: ${dateStr}`);
+    } else {
+        const hasExistingDate = /\d{4}\/\d{1,2}\/\d{1,2}|\d{4}-\d{1,2}-\d{1,2}|\d{1,2}\/\d{1,2}/.test(currentContent);
+
+        if (hasExistingDate) {
+            alert('既存の日付が検出されたため、日付の追加は行いません');
+        } else {
+            const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
+            textArea.value = finalContent;
+            alert(`${templateName}の先頭に日付・時刻を追加しました: ${dateStr} ${timeStr}`);
+        }
+    }
+}
+
+/**
+ * 指定テンプレートボックスの内容をクリップボードにコピーする
+ * @param {string} templateName - 対象テンプレート名
+ */
+function copyTemplateToClipboard(templateName) {
+    const textArea = document.getElementById(`template-box-${templateName}`);
+    if (!textArea) {
+        alert('テンプレートボックスが見つかりません');
+        return;
+    }
+
+    const content = textArea.value;
+    if (!content.trim()) {
+        alert('コピーするテンプレート内容がありません');
+        return;
+    }
+
+    navigator.clipboard.writeText(content)
+        .then(() => {
+            alert(`📋 ${templateName}をクリップボードにコピーしました`);
+        })
+        .catch(err => {
+            console.error('クリップボードコピーエラー:', err);
+            // フォールバック機能
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = content;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.focus();
+            tempTextArea.select();
+            try {
+                document.execCommand('copy');
+                alert(`📋 ${templateName}をクリップボードにコピーしました`);
+            } catch (fallbackErr) {
+                alert('コピーに失敗しました');
+            }
+            document.body.removeChild(tempTextArea);
+        });
+}
+
+/**
+ * 個別テンプレートボックスの編集内容を保存する
+ * @param {string} templateName - 対象テンプレート名
+ */
+function saveIndividualTemplate(templateName) {
+    const textArea = document.getElementById(`template-box-${templateName}`);
+    if (!textArea) {
+        alert('テンプレートボックスが見つかりません');
+        return;
+    }
+
+    const content = textArea.value;
+
+    try {
+        templates[templateName] = content;
+        saveTemplates();
+        renderTemplateList(); // 一覧のプレビュー更新
+        alert(`💾 ${templateName}を保存しました`);
+    } catch (error) {
+        console.error('個別テンプレート保存エラー:', error);
+        alert('保存に失敗しました: ' + error.message);
+    }
 }
 
 function saveTemplate() {
