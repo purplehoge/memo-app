@@ -185,7 +185,6 @@ textarea:focus {
 .template-item {
     padding: 12px;
     border-bottom: 1px solid var(--light-purple);
-    cursor: pointer;
     transition: all 0.3s ease;
 }
 
@@ -204,9 +203,32 @@ textarea:focus {
     box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
 }
 
+.template-item.checked {
+    background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+    border-left: 4px solid var(--success-color);
+}
+
+/* チェックボックス関連 */
+.template-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    min-height: var(--min-touch-target); /* シニア世代対応: 48px以上のタッチターゲット */
+}
+
+.template-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--success-color);
+}
+
 .template-name {
     font-weight: bold;
     margin-bottom: 5px;
+    cursor: pointer;
+    flex: 1;
 }
 
 .template-preview {
@@ -215,6 +237,142 @@ textarea:focus {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-left: 32px; /* チェックボックス分のインデント */
+}
+
+/* 選択済みテンプレートセクション */
+.selected-templates-section {
+    margin-top: 30px;
+    border-top: 2px solid var(--border-purple);
+    padding-top: 20px;
+}
+
+.selected-templates-section h3 {
+    color: var(--primary-purple-dark);
+    margin-bottom: 20px;
+    font-size: var(--header-font-size);
+    font-weight: 600;
+}
+
+.selected-template-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* テンプレートボックス */
+.template-box-container {
+    border: 2px solid var(--border-purple);
+    border-radius: 12px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.1);
+}
+
+.template-box-header {
+    margin: 0 0 15px 0;
+    color: var(--primary-purple-dark);
+    font-size: var(--large-font-size);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-purple);
+    padding-bottom: 10px;
+}
+
+.template-box-textarea {
+    width: 100%;
+    min-height: 120px; /* シニア世代対応: 十分な高さ */
+    padding: 15px;
+    border: 2px solid var(--border-purple);
+    border-radius: 8px;
+    font-size: var(--base-font-size); /* シニア世代対応: 読みやすいフォントサイズ */
+    line-height: 1.6;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', monospace;
+    resize: vertical;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-high-contrast);
+    transition: all 0.2s ease;
+}
+
+.template-box-textarea:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: 2px;
+    border-color: var(--primary-purple);
+    background: var(--background-high-contrast);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* テンプレートボックスボタン */
+.template-box-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.template-box-btn {
+    min-width: 120px; /* シニア世代対応: 十分な幅 */
+    min-height: var(--min-touch-target); /* シニア世代対応: 48px以上のタッチターゲット */
+    padding: 12px 20px;
+    font-size: var(--base-font-size); /* シニア世代対応: 読みやすいフォントサイズ */
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.template-box-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.template-box-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.template-box-btn:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
+
+/* 既存ボタンスタイルとの統一 */
+.template-box-btn.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(128, 90, 213, 0.3);
+}
+
+.template-box-btn.btn-secondary:hover {
+    background: var(--secondary-hover);
+    box-shadow: 0 4px 12px rgba(128, 90, 213, 0.4);
+}
+
+.template-box-btn.btn-primary {
+    background: var(--primary-purple);
+    color: white;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.template-box-btn.btn-primary:hover {
+    background: var(--primary-purple-dark);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.template-box-btn.btn-success {
+    background: var(--success-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+}
+
+.template-box-btn.btn-success:hover {
+    background: var(--success-hover);
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
 }
 
 .template-controls {
@@ -352,6 +510,64 @@ input[type="text"]:focus {
     .template-preview {
         font-size: var(--base-font-size);
         color: var(--text-medium);
+    }
+
+    /* チェックボックス関連のモバイル対応 */
+    .template-checkbox-label {
+        gap: 16px;
+        min-height: var(--mobile-button-height);
+    }
+
+    .template-checkbox {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* 選択済みテンプレートボックスのモバイル対応 */
+    .selected-templates-section h3 {
+        font-size: var(--header-font-size);
+        margin-bottom: 16px;
+    }
+
+    .template-box-container {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .template-box-header {
+        font-size: var(--large-font-size);
+        margin-bottom: 12px;
+    }
+
+    .template-box-textarea {
+        min-height: 150px;
+        padding: 16px;
+        font-size: var(--base-font-size);
+        line-height: 1.6;
+    }
+
+    .template-box-textarea:focus {
+        outline: var(--focus-outline-width) solid var(--focus-outline-color);
+        outline-offset: 2px;
+    }
+
+    .template-box-buttons {
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .template-box-btn {
+        min-width: 140px;
+        min-height: var(--mobile-button-height);
+        padding: 16px 20px;
+        font-size: var(--button-font-size);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+    }
+
+    .template-box-btn:focus {
+        outline: var(--focus-outline-width) solid var(--focus-outline-color);
+        outline-offset: 2px;
     }
 }
 
