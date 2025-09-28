@@ -616,69 +616,64 @@ input[type="text"]:focus {
    レスポンシブ横並びレイアウト（新機能）
    ======================================== */
 
-/* タブレット以上: 横並びレイアウト */
+/* タブレット以上: 横並びレイアウト（統合版） */
 @media (min-width: 769px) {
     .selected-template-boxes {
+        display: flex !important;
         flex-direction: row !important; /* 横並びに変更 */
-        flex-wrap: wrap; /* 自動改行有効 */
-        gap: 20px;
-        align-items: flex-start;
-        justify-content: flex-start;
+        flex-wrap: wrap !important; /* 自動改行有効 */
+        gap: 20px !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
     }
 
     .template-box-container {
-        flex: 1 1 300px; /* 基本サイズ300px */
-        max-width: calc((100% - 40px) / 2); /* 2つまで確実に横並び */
-        min-width: 300px; /* シニア世代対応: 最小幅確保 */
+        flex: 1 1 300px !important; /* 基本サイズ300px */
+        max-width: calc((100% - 40px) / 2) !important; /* 2つまで確実に横並び */
+        min-width: 300px !important; /* シニア世代対応: 最小幅確保 */
+        width: auto !important; /* 既存のwidth指定を上書き */
+        height: fit-content !important;
+        align-self: start !important;
+    }
+
+    /* ボタンの配置調整（横並び時） */
+    .template-box-buttons {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        justify-content: flex-start !important;
+    }
+
+    .template-box-btn {
+        flex: 1 1 auto !important;
+        min-width: 100px !important; /* 横並び時は少しコンパクトに */
+        max-width: 150px !important;
     }
 }
 
 /* デスクトップ: 3つまで横並び */
 @media (min-width: 1201px) {
     .selected-template-boxes {
-        gap: 24px;
+        gap: 24px !important;
     }
 
     .template-box-container {
-        flex: 1 1 350px; /* 3つ横並び基本サイズ */
-        max-width: calc((100% - 48px) / 3); /* 3つまで確実に横並び */
-        min-width: 350px;
+        flex: 1 1 350px !important; /* 3つ横並び基本サイズ */
+        max-width: calc((100% - 48px) / 3) !important; /* 3つまで確実に横並び */
+        min-width: 350px !important;
     }
 }
 
 /* 超大画面: 4つまで横並び */
 @media (min-width: 1600px) {
     .selected-template-boxes {
-        gap: 28px;
+        gap: 28px !important;
     }
 
     .template-box-container {
-        flex: 1 1 380px; /* 4つ横並び基本サイズ */
-        max-width: calc((100% - 84px) / 4); /* 4つまで確実に横並び */
-        min-width: 380px;
-    }
-}
-
-/* グリッドレイアウト時の調整 */
-@media (min-width: 769px) {
-    /* テンプレートボックスの高さ統一 */
-    .template-box-container {
-        height: fit-content;
-        align-self: start;
-    }
-
-    /* ボタンの配置調整（横並び時） */
-    .template-box-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: flex-start;
-    }
-
-    .template-box-btn {
-        flex: 1 1 auto;
-        min-width: 100px; /* 横並び時は少しコンパクトに */
-        max-width: 150px;
+        flex: 1 1 380px !important; /* 4つ横並び基本サイズ */
+        max-width: calc((100% - 84px) / 4) !important; /* 4つまで確実に横並び */
+        min-width: 380px !important;
     }
 }
 
