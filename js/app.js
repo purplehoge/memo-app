@@ -205,10 +205,17 @@ function renderSelectedTemplateBoxes() {
         saveButton.textContent = '💾 保存';
         saveButton.onclick = () => saveIndividualTemplate(templateName);
 
+        // 削除ボタン
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'btn btn-danger template-box-btn';
+        deleteButton.textContent = '🗑️ 削除';
+        deleteButton.onclick = () => deleteTemplateFromBox(templateName);
+
         // ボタンをコンテナに追加
         buttonContainer.appendChild(dateButton);
         buttonContainer.appendChild(copyButton);
         buttonContainer.appendChild(saveButton);
+        buttonContainer.appendChild(deleteButton);
 
         // 要素組み立て
         boxContainer.appendChild(header);
@@ -329,6 +336,38 @@ function saveIndividualTemplate(templateName) {
         console.error('個別テンプレート保存エラー:', error);
         alert('保存に失敗しました: ' + error.message);
     }
+}
+
+/**
+ * 選択済みテンプレートボックスからテンプレートを削除する
+ * @param {string} templateName - 削除対象テンプレート名
+ */
+function deleteTemplateFromBox(templateName) {
+    // 確認ダイアログ表示
+    const message = `テンプレート「${templateName}」を完全に削除しますか？\n\nこの操作は取り消すことができません。`;
+
+    showConfirmDialog(message, () => {
+        try {
+            // テンプレート削除
+            delete templates[templateName];
+
+            // 選択状態からも削除
+            selectedTemplates.delete(templateName);
+
+            // データ永続化
+            saveTemplates();
+            saveSelectedTemplates();
+
+            // 表示更新
+            renderTemplateList();
+            renderSelectedTemplateBoxes();
+
+            alert(`🗑️ テンプレート「${templateName}」を削除しました`);
+        } catch (error) {
+            console.error('テンプレート削除エラー:', error);
+            alert('削除に失敗しました: ' + error.message);
+        }
+    });
 }
 
 function saveTemplate() {
