@@ -240,16 +240,19 @@ textarea:focus {
     margin-left: 32px; /* チェックボックス分のインデント */
 }
 
-/* 選択済みテンプレートセクション */
+/* 選択済みテンプレートセクション（全幅エリア） */
 .selected-templates-section {
-    margin-top: 30px;
+    width: 100%;
+    background: var(--very-light-purple);
     border-top: 2px solid var(--border-purple);
-    padding-top: 20px;
+    padding: 20px 0;
+    margin-top: 20px;
 }
 
 .selected-templates-section h3 {
     color: var(--primary-purple-dark);
     margin-bottom: 20px;
+    margin-top: 0;
     font-size: var(--header-font-size);
     font-weight: 600;
 }
@@ -624,9 +627,9 @@ input[type="text"]:focus {
     }
 
     .template-box-container {
-        flex: 1 1 300px; /* 最小幅300px、自動拡張・縮小 */
-        max-width: 500px; /* 最大幅制限で見やすさ確保 */
-        min-width: 300px; /* シニア世代対応: 最小幅確保 */
+        flex: 1 1 320px; /* フルHDで3つまで横並び可能なサイズ */
+        max-width: 450px; /* 最大幅制限で見やすさ確保 */
+        min-width: 320px; /* シニア世代対応: 最小幅確保 */
     }
 }
 
@@ -637,9 +640,9 @@ input[type="text"]:focus {
     }
 
     .template-box-container {
-        flex: 1 1 350px; /* デスクトップでは少し大きく */
-        max-width: 450px;
-        min-width: 350px;
+        flex: 1 1 380px; /* デスクトップでは3つまで快適に表示 */
+        max-width: 500px;
+        min-width: 380px;
     }
 }
 
@@ -650,9 +653,9 @@ input[type="text"]:focus {
     }
 
     .template-box-container {
-        flex: 1 1 380px; /* 超大画面ではさらに大きく */
-        max-width: 500px;
-        min-width: 380px;
+        flex: 1 1 400px; /* 超大画面では4つまで快適に表示 */
+        max-width: 520px;
+        min-width: 400px;
     }
 }
 
