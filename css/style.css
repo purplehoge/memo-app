@@ -633,7 +633,7 @@ input[type="text"]:focus {
     .selected-template-boxes {
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
-        max-width: 1400px; /* 最大幅制限で見やすさ確保 */
+        max-width: calc(100vw - 40px); /* ビューポート幅に応じた最大幅 */
         margin: 0 auto; /* 中央揃え */
     }
 }
@@ -643,7 +643,7 @@ input[type="text"]:focus {
     .selected-template-boxes {
         grid-template-columns: repeat(4, 1fr);
         gap: 28px;
-        max-width: 1800px;
+        max-width: calc(100vw - 40px); /* ビューポート幅に応じた最大幅 */
     }
 
     .template-box-container {
