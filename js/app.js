@@ -356,7 +356,7 @@ function deleteTemplateFromBox(templateName) {
     // 確認ダイアログ表示
     const message = `テンプレート「${templateName}」を完全に削除しますか？\n\nこの操作は取り消すことができません。`;
 
-    showConfirmDialog(message, () => {
+    showSeniorConfirmDialog(message, () => {
         try {
             // テンプレート削除
             delete templates[templateName];
