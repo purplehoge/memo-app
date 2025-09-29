@@ -636,9 +636,18 @@ input[type="text"]:focus {
 
 /* デスクトップ・タブレット: 横並び強制 */
 @media (min-width: 769px) {
-    .selected-template-boxes {
+    .selected-templates-area .selected-template-boxes,
+    #selectedTemplateBoxes,
+    div.selected-template-boxes {
         flex-direction: row !important; /* デスクトップでは強制的に横並び */
         flex-wrap: wrap !important; /* 自動改行 */
+        display: flex !important; /* flex確保 */
+    }
+
+    /* さらに強力な指定 */
+    .main-content .selected-templates-area .selected-template-boxes {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
     }
 }
 
