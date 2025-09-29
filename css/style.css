@@ -43,18 +43,19 @@ body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, var(--very-light-purple) 0%, var(--purple-gray) 100%);
+    background: rgba(255, 255, 255, 0.95);
     color: var(--text-dark);
     min-height: 100vh;
+    overflow-x: auto;
 }
 
 .container {
     width: 100%;
     margin: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: transparent;
     border-radius: 0;
     box-shadow: none;
-    backdrop-filter: blur(10px);
+    backdrop-filter: none;
     border: none;
     overflow: hidden;
     min-height: 100vh;
@@ -74,14 +75,14 @@ body {
 
 .main-content {
     display: flex;
-    min-height: 70vh;
+    min-height: calc(100vh - 80px); /* ヘッダー分を引く */
     gap: 0;
 }
 
 .sidebar {
     width: 300px;
-    background: var(--very-light-purple);
-    border-right: 1px solid var(--border-purple);
+    background: rgba(255, 255, 255, 0.98);
+    border-right: 1px solid #e0e0e0;
     padding: 20px;
 }
 
@@ -90,12 +91,13 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--border-purple);
+    border-right: 1px solid #e0e0e0;
+    background: rgba(255, 255, 255, 0.98);
 }
 
 .selected-templates-area {
     width: 400px;
-    background: var(--very-light-purple);
+    background: rgba(255, 255, 255, 0.98);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -334,10 +336,10 @@ textarea:focus {
 }
 
 .template-box-btn {
-    min-width: 60px;
-    min-height: 30px;
-    padding: 6px 8px;
-    font-size: 10px;
+    min-width: 50px;
+    min-height: 32px;
+    padding: 8px 6px;
+    font-size: 11px;
     font-weight: 600;
     border: none;
     border-radius: 4px;
