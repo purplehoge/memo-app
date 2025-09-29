@@ -650,11 +650,21 @@ input[type="text"]:focus {
         flex-wrap: wrap !important;
     }
 
-    /* 根本原因修正: テンプレートボックスの幅を固定幅に戻す */
+    /* 最適化: テンプレートボックス幅とボタンサイズ調整 */
     .template-box-container {
-        width: 280px !important; /* デスクトップでは固定幅 */
-        max-width: 320px !important; /* 最大幅制限 */
-        flex: 0 0 auto !important; /* flex-shrinkを0にして固有サイズ維持 */
+        width: 320px !important; /* 4ボタン対応幅に調整 */
+        max-width: 320px !important; /* 固定幅 */
+        flex: 0 0 auto !important; /* サイズ維持 */
+    }
+
+    /* ボタンサイズ最適化: アイコン中心の簡潔表示 */
+    .template-box-btn {
+        min-width: 32px !important; /* アイコンサイズに最適化 */
+        min-height: 32px !important;
+        padding: 6px 8px !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        border-radius: 6px !important;
     }
 }
 

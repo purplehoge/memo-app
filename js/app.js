@@ -198,25 +198,29 @@ function renderSelectedTemplateBoxes() {
         // 日付付与ボタン
         const dateButton = document.createElement('button');
         dateButton.className = 'btn btn-secondary template-box-btn';
-        dateButton.textContent = '📅 日付付与';
+        dateButton.textContent = '📅';
+        dateButton.title = '日付付与';
         dateButton.onclick = () => addDateToTemplateBox(templateName);
 
         // クリップボードコピーボタン
         const copyButton = document.createElement('button');
         copyButton.className = 'btn btn-primary template-box-btn';
-        copyButton.textContent = '📋 コピー';
+        copyButton.textContent = '📋';
+        copyButton.title = 'コピー';
         copyButton.onclick = () => copyTemplateToClipboard(templateName);
 
         // 保存ボタン
         const saveButton = document.createElement('button');
         saveButton.className = 'btn btn-success template-box-btn';
-        saveButton.textContent = '💾 保存';
+        saveButton.textContent = '💾';
+        saveButton.title = '保存';
         saveButton.onclick = () => saveIndividualTemplate(templateName);
 
         // 削除ボタン
         const deleteButton = document.createElement('button');
         deleteButton.className = 'btn btn-danger template-box-btn';
-        deleteButton.textContent = '🗑️ 削除';
+        deleteButton.textContent = '🗑️';
+        deleteButton.title = '削除';
         deleteButton.onclick = () => deleteTemplateFromBox(templateName);
 
         // ボタンをコンテナに追加
