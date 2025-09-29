@@ -96,11 +96,17 @@ function renderTemplateList() {
         // チェックボックスラベル作成
         const label = document.createElement('label');
         label.className = 'template-checkbox-label';
+        label.htmlFor = `checkbox-${name}`;
+        checkbox.id = `checkbox-${name}`;
+
+        // テンプレート内容エリア作成（チェックボックスとは分離）
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'template-content';
+        contentDiv.onclick = () => selectTemplate(name); // 既存互換性維持
 
         const nameDiv = document.createElement('div');
         nameDiv.className = 'template-name';
         nameDiv.textContent = name;
-        nameDiv.onclick = () => selectTemplate(name); // 既存互換性維持
 
         const previewDiv = document.createElement('div');
         previewDiv.className = 'template-preview';
@@ -111,9 +117,11 @@ function renderTemplateList() {
 
         // 要素組み立て
         label.appendChild(checkbox);
-        label.appendChild(nameDiv);
+        contentDiv.appendChild(nameDiv);
+        contentDiv.appendChild(previewDiv);
+
         item.appendChild(label);
-        item.appendChild(previewDiv);
+        item.appendChild(contentDiv);
 
         // 既存選択状態の表示（単一選択）
         if (selectedTemplate === name) {

@@ -186,6 +186,9 @@ textarea:focus {
     padding: 12px;
     border-bottom: 1px solid var(--light-purple);
     transition: all 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 }
 
 .template-item:hover {
@@ -212,9 +215,14 @@ textarea:focus {
 .template-checkbox-label {
     display: flex;
     align-items: center;
-    gap: 12px;
     cursor: pointer;
     min-height: var(--min-touch-target); /* シニア世代対応: 48px以上のタッチターゲット */
+    min-width: 20px;
+}
+
+.template-content {
+    flex: 1;
+    cursor: pointer;
 }
 
 .template-checkbox {
