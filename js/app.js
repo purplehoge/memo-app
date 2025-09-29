@@ -467,13 +467,11 @@ function addDateToMemo() {
 
 function newMemo() {
     const now = new Date();
-    const dateStr = now.getFullYear() + '/' + 
-                   String(now.getMonth() + 1).padStart(2, '0') + '/' + 
+    const dateStr = now.getFullYear() + '/' +
+                   String(now.getMonth() + 1).padStart(2, '0') + '/' +
                    String(now.getDate()).padStart(2, '0');
-    const timeStr = String(now.getHours()).padStart(2, '0') + ':' + 
-                   String(now.getMinutes()).padStart(2, '0');
-    
-    document.getElementById('memoText').value = `${dateStr} ${timeStr}\n\n`;
+
+    document.getElementById('memoText').value = `${dateStr}\n\n`;
     document.getElementById('templateName').value = '';
     selectedTemplate = null;
     renderTemplateList();
