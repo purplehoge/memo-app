@@ -249,8 +249,6 @@ function addDateToTemplateBox(templateName) {
     const dateStr = now.getFullYear() + '/' +
                    String(now.getMonth() + 1).padStart(2, '0') + '/' +
                    String(now.getDate()).padStart(2, '0');
-    const timeStr = String(now.getHours()).padStart(2, '0') + ':' +
-                   String(now.getMinutes()).padStart(2, '0');
 
     let currentContent = textArea.value;
 
@@ -276,9 +274,9 @@ function addDateToTemplateBox(templateName) {
         if (hasExistingDate) {
             alert('既存の日付が検出されたため、日付の追加は行いません');
         } else {
-            const finalContent = `${dateStr} ${timeStr}\n\n${currentContent}`;
+            const finalContent = `${dateStr}\n\n${currentContent}`;
             textArea.value = finalContent;
-            alert(`${templateName}の先頭に日付・時刻を追加しました: ${dateStr} ${timeStr}`);
+            alert(`${templateName}の先頭に日付を追加しました: ${dateStr}`);
         }
     }
 }
