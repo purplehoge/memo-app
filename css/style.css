@@ -218,9 +218,10 @@ textarea:focus {
 }
 
 .template-item.selected {
-    background: var(--secondary-purple);
-    color: white;
-    box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
+    background: #f5f5f5;
+    color: #333333;
+    border: 2px solid #555555;
+    box-shadow: 0 2px 8px rgba(85, 85, 85, 0.2);
 }
 
 .template-item.checked {
@@ -268,44 +269,50 @@ textarea:focus {
 /* 旧selected-templates-section削除済み（3列レイアウト対応） */
 
 .selected-template-boxes {
-    display: flex;
-    flex-direction: column; /* 3列目では常に縦並び */
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3列グリッド */
+    gap: 12px;
     flex: 1;
     overflow-y: auto;
+    align-content: start;
 }
 
 /* テンプレートボックス */
 .template-box-container {
     border: 2px solid var(--border-purple);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 8px;
+    padding: 12px;
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.1);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
 }
 
 .template-box-header {
-    margin: 0 0 15px 0;
+    margin: 0 0 8px 0;
     color: var(--primary-purple-dark);
-    font-size: var(--large-font-size);
+    font-size: 12px;
     font-weight: 600;
     border-bottom: 1px solid var(--border-purple);
-    padding-bottom: 10px;
+    padding-bottom: 6px;
+    flex-shrink: 0;
 }
 
 .template-box-textarea {
     width: 100%;
-    min-height: 120px; /* シニア世代対応: 十分な高さ */
-    padding: 15px;
-    border: 2px solid var(--border-purple);
-    border-radius: 8px;
-    font-size: var(--base-font-size); /* シニア世代対応: 読みやすいフォントサイズ */
-    line-height: 1.6;
+    min-height: 80px;
+    padding: 8px;
+    border: 1px solid var(--border-purple);
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
     font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', monospace;
     resize: vertical;
     background: rgba(255, 255, 255, 0.9);
     color: var(--text-high-contrast);
     transition: all 0.2s ease;
+    flex: 1;
 }
 
 .template-box-textarea:focus {
@@ -319,24 +326,26 @@ textarea:focus {
 /* テンプレートボックスボタン */
 .template-box-buttons {
     display: flex;
-    gap: 12px;
-    margin-top: 15px;
+    gap: 4px;
+    margin-top: 8px;
     flex-wrap: wrap;
+    flex-shrink: 0;
 }
 
 .template-box-btn {
-    min-width: 120px; /* シニア世代対応: 十分な幅 */
-    min-height: var(--min-touch-target); /* シニア世代対応: 48px以上のタッチターゲット */
-    padding: 12px 20px;
-    font-size: var(--base-font-size); /* シニア世代対応: 読みやすいフォントサイズ */
+    min-width: 60px;
+    min-height: 30px;
+    padding: 6px 8px;
+    font-size: 10px;
     font-weight: 600;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex: 1;
     text-align: center;
     letter-spacing: 0.02em;
 }
@@ -563,9 +572,15 @@ input[type="text"]:focus {
         margin-bottom: 16px;
     }
 
+    .selected-template-boxes {
+        grid-template-columns: 1fr; /* モバイルでは1列 */
+        gap: 16px;
+    }
+
     .template-box-container {
         padding: 16px;
-        margin-bottom: 16px;
+        margin-bottom: 0;
+        min-height: auto;
     }
 
     .template-box-header {
