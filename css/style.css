@@ -42,21 +42,22 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     background: linear-gradient(135deg, var(--very-light-purple) 0%, var(--purple-gray) 100%);
     color: var(--text-dark);
     min-height: 100vh;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+    border-radius: 0;
+    box-shadow: none;
     backdrop-filter: blur(10px);
-    border: 1px solid var(--border-purple);
+    border: none;
     overflow: hidden;
+    min-height: 100vh;
 }
 
 .header {
@@ -449,15 +450,17 @@ input[type="text"]:focus {
 /* スマートフォン（シニア対応強化） */
 @media (max-width: 768px) {
     body {
-        padding: 8px;
+        padding: 0;
         font-size: var(--base-font-size);
         font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', 'Helvetica Neue', Arial, sans-serif;
         line-height: 1.6;
         color: var(--text-high-contrast);
     }
-    
+
     .container {
-        border-radius: 12px;
+        border-radius: 0;
+        width: 100%;
+        margin: 0;
     }
     
     .header h1 {
