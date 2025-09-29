@@ -634,7 +634,7 @@ input[type="text"]:focus {
     }
 }
 
-/* デスクトップ・タブレット: 横並び強制 */
+/* デスクトップ・タブレット: 横並び強制とボックス幅修正 */
 @media (min-width: 769px) {
     .selected-templates-area .selected-template-boxes,
     #selectedTemplateBoxes,
@@ -648,6 +648,13 @@ input[type="text"]:focus {
     .main-content .selected-templates-area .selected-template-boxes {
         flex-direction: row !important;
         flex-wrap: wrap !important;
+    }
+
+    /* 根本原因修正: テンプレートボックスの幅を固定幅に戻す */
+    .template-box-container {
+        width: 280px !important; /* デスクトップでは固定幅 */
+        max-width: 320px !important; /* 最大幅制限 */
+        flex: 0 0 auto !important; /* flex-shrinkを0にして固有サイズ維持 */
     }
 }
 
