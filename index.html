@@ -16,19 +16,19 @@
             <div class="sidebar">
                 <div class="template-section">
                     <h3>テンプレート</h3>
-                    
+
                     <input type="text" id="templateName" placeholder="テンプレート名を入力">
-                    
+
                     <div class="template-controls">
                         <button class="btn btn-success" onclick="saveTemplate()">保存</button>
                         <button class="btn btn-danger" onclick="deleteTemplate()">削除</button>
                     </div>
-                    
+
                     <div class="template-list" id="templateList">
                     </div>
                 </div>
             </div>
-            
+
             <div class="memo-area">
                 <div class="date-info" id="dateInfo"></div>
 
@@ -41,11 +41,9 @@
 
                 <textarea id="memoText" placeholder="ここにメモを入力してください..."></textarea>
             </div>
-        </div>
 
-        <!-- 選択済みテンプレートボックス表示エリア（全幅） -->
-        <div class="selected-templates-section">
-            <div class="container">
+            <!-- 選択済みテンプレートエリア（3列目） -->
+            <div class="selected-templates-area">
                 <h3>選択済みテンプレート</h3>
                 <div id="selectedTemplateBoxes" class="selected-template-boxes">
                     <!-- 動的に生成されるテンプレートボックス -->

@@ -74,6 +74,7 @@ body {
 .main-content {
     display: flex;
     min-height: 70vh;
+    gap: 0;
 }
 
 .sidebar {
@@ -88,6 +89,22 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid var(--border-purple);
+}
+
+.selected-templates-area {
+    width: 400px;
+    background: var(--very-light-purple);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-templates-area h3 {
+    color: var(--primary-purple-dark);
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-size: var(--header-font-size);
 }
 
 .btn {
@@ -248,27 +265,14 @@ textarea:focus {
     margin-left: 32px; /* チェックボックス分のインデント */
 }
 
-/* 選択済みテンプレートセクション（全幅エリア） */
-.selected-templates-section {
-    width: 100%;
-    background: var(--very-light-purple);
-    border-top: 2px solid var(--border-purple);
-    padding: 20px 0;
-    margin-top: 20px;
-}
-
-.selected-templates-section h3 {
-    color: var(--primary-purple-dark);
-    margin-bottom: 20px;
-    margin-top: 0;
-    font-size: var(--header-font-size);
-    font-weight: 600;
-}
+/* 旧selected-templates-section削除済み（3列レイアウト対応） */
 
 .selected-template-boxes {
     display: flex;
-    flex-direction: column; /* モバイル: 縦並び */
+    flex-direction: column; /* 3列目では常に縦並び */
     gap: 20px;
+    flex: 1;
+    overflow-y: auto;
 }
 
 /* テンプレートボックス */
@@ -464,9 +468,17 @@ input[type="text"]:focus {
         order: 1; /* テンプレート選択を上部に */
         padding: 16px;
     }
-    
+
     .memo-area {
         order: 2;
+        padding: 16px;
+        border-right: none;
+        border-bottom: 2px solid var(--border-purple);
+    }
+
+    .selected-templates-area {
+        width: 100%;
+        order: 3; /* 選択済みテンプレートを最下部に */
         padding: 16px;
     }
     
@@ -546,7 +558,7 @@ input[type="text"]:focus {
     }
 
     /* 選択済みテンプレートボックスのモバイル対応 */
-    .selected-templates-section h3 {
+    .selected-templates-area h3 {
         font-size: var(--header-font-size);
         margin-bottom: 16px;
     }
@@ -636,70 +648,6 @@ input[type="text"]:focus {
    ======================================== */
 
 /* タブレット以上: 横並びレイアウト（統合版） */
-@media (min-width: 769px) {
-    .selected-template-boxes {
-        display: flex !important;
-        flex-direction: row !important; /* 横並びに変更 */
-        flex-wrap: wrap !important; /* 自動改行有効 */
-        gap: 20px !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-    }
+/* 3列レイアウトでは横並びレイアウト不要（削除済み） */
 
-    .template-box-container {
-        flex: 1 1 300px !important; /* 基本サイズ300px */
-        max-width: calc((100% - 40px) / 2) !important; /* 2つまで確実に横並び */
-        min-width: 300px !important; /* シニア世代対応: 最小幅確保 */
-        width: auto !important; /* 既存のwidth指定を上書き */
-        height: fit-content !important;
-        align-self: start !important;
-    }
-
-    /* ボタンの配置調整（横並び時） */
-    .template-box-buttons {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-        justify-content: flex-start !important;
-    }
-
-    .template-box-btn {
-        flex: 1 1 auto !important;
-        min-width: 100px !important; /* 横並び時は少しコンパクトに */
-        max-width: 150px !important;
-    }
-}
-
-/* デスクトップ: 3つまで横並び */
-@media (min-width: 1201px) {
-    .selected-template-boxes {
-        gap: 24px !important;
-    }
-
-    .template-box-container {
-        flex: 1 1 350px !important; /* 3つ横並び基本サイズ */
-        max-width: calc((100% - 48px) / 3) !important; /* 3つまで確実に横並び */
-        min-width: 350px !important;
-    }
-}
-
-/* 超大画面: 4つまで横並び */
-@media (min-width: 1600px) {
-    .selected-template-boxes {
-        gap: 28px !important;
-    }
-
-    .template-box-container {
-        flex: 1 1 380px !important; /* 4つ横並び基本サイズ */
-        max-width: calc((100% - 84px) / 4) !important; /* 4つまで確実に横並び */
-        min-width: 380px !important;
-    }
-}
-
-/* 超大画面でのボタン調整 */
-@media (min-width: 1600px) {
-    .template-box-btn {
-        min-width: 120px;
-        max-width: 180px;
-    }
-}
+/* 3列レイアウトのため横並びレスポンシブ削除済み */
