@@ -337,8 +337,9 @@ textarea:focus {
     display: flex;
     gap: 4px;
     margin-top: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* ボタンを1行に強制 */
     flex-shrink: 0;
+    justify-content: space-between; /* ボタン間の間隔を均等配分 */
 }
 
 .template-box-btn {
@@ -652,19 +653,26 @@ input[type="text"]:focus {
 
     /* 最適化: テンプレートボックス幅とボタンサイズ調整 */
     .template-box-container {
-        width: 320px !important; /* 4ボタン対応幅に調整 */
-        max-width: 320px !important; /* 固定幅 */
+        width: 350px !important; /* 4ボタン余裕幅に拡大 */
+        max-width: 350px !important; /* 固定幅 */
         flex: 0 0 auto !important; /* サイズ維持 */
     }
 
     /* ボタンサイズ最適化: アイコン中心の簡潔表示 */
     .template-box-btn {
-        min-width: 32px !important; /* アイコンサイズに最適化 */
-        min-height: 32px !important;
-        padding: 6px 8px !important;
-        font-size: 12px !important;
+        min-width: 36px !important; /* 少し余裕を持たせる */
+        min-height: 36px !important;
+        padding: 8px !important;
+        font-size: 14px !important;
         font-weight: 500 !important;
         border-radius: 6px !important;
+        flex: 1 !important; /* ボタン幅を均等分割 */
+    }
+
+    /* ボタンコンテナもデスクトップで最適化 */
+    .template-box-buttons {
+        flex-wrap: nowrap !important; /* 絶対に折り返さない */
+        gap: 6px !important; /* 適切な間隔 */
     }
 }
 
