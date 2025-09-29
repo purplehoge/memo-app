@@ -273,12 +273,14 @@ textarea:focus {
 /* 旧selected-templates-section削除済み（3列レイアウト対応） */
 
 .selected-template-boxes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 自動調整グリッド */
+    display: flex;
+    flex-direction: row; /* 横並びを明示 */
+    flex-wrap: wrap; /* 自動改行 */
     gap: 16px;
     flex: 1;
     overflow-y: auto;
-    align-content: start;
+    align-content: flex-start;
+    align-items: flex-start;
 }
 
 /* テンプレートボックス */
@@ -291,6 +293,9 @@ textarea:focus {
     min-height: 220px;
     display: flex;
     flex-direction: column;
+    flex: 0 0 auto; /* 固有サイズを維持 */
+    width: 280px; /* 適切な幅を設定 */
+    max-width: 320px; /* 最大幅制限 */
 }
 
 .template-box-header {
@@ -580,11 +585,13 @@ input[type="text"]:focus {
     }
 
     .selected-template-boxes {
-        grid-template-columns: 1fr; /* モバイルでは1列 */
+        flex-direction: column; /* モバイルでは縦並び */
         gap: 16px;
     }
 
     .template-box-container {
+        width: 100%; /* モバイルでは全幅 */
+        max-width: none;
         padding: 16px;
         margin-bottom: 0;
         min-height: auto;
