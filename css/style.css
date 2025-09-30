@@ -694,11 +694,12 @@ input[type="text"]:focus {
     }
 }
 
-/* 大画面でのアクセシビリティ配慮 */
+/* 大画面でのアクセシビリティ配慮 - 左詰めレイアウト */
 @media (min-width: 1025px) {
     .main-content {
-        max-width: 1200px;
-        margin: 0 auto;
+        max-width: none;         /* 幅制限解除 */
+        margin: 0 0 0 20px;      /* 左余白のみ */
+        padding-right: 20px;     /* 右余白 */
     }
 
     .sidebar {
