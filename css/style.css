@@ -420,16 +420,25 @@ textarea:focus {
 
 .template-controls {
     display: flex;
-    gap: 5px;
+    gap: 4px;
     margin-top: 15px;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.template-controls .btn {
+    margin: 2px 0; /* 縦のmarginを削減 */
+    line-height: 1.2; /* line-heightを調整 */
 }
 
 .template-controls .btn-small {
-    font-size: 11px;
-    padding: 6px 8px;
+    font-size: 10px;
+    padding: 4px 6px;
     min-width: auto;
     flex: none;
+    margin: 2px 0;
+    line-height: 1.1;
+    border-radius: 4px; /* 小さめの角丸 */
 }
 
 input[type="text"] {
