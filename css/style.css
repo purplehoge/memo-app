@@ -194,7 +194,12 @@ textarea:focus {
 
 .memo-controls .btn {
     flex: 1;
-    min-width: 75px; /* 「📅 日付付加」が1行表示されるよう最小幅を調整 */
+    min-width: 75px !important; /* 「📅 日付付加」が1行表示されるよう最小幅を調整 */
+    padding: 8px 12px !important; /* 統一されたパディング */
+    margin: 2px 0 !important; /* 統一されたマージン */
+    font-size: 14px !important; /* 統一されたフォントサイズ */
+    line-height: 1.2 !important; /* 統一された行間 */
+    min-height: auto !important; /* 高さ自動調整 */
 }
 
 .template-section h3 {
@@ -437,7 +442,12 @@ textarea:focus {
 
 .template-controls .btn {
     flex: 1; /* 4つのボタンを均等配置 */
-    min-width: 45px; /* 最小幅を設定して一行表示を保証 */
+    min-width: 45px !important; /* 最小幅を設定して一行表示を保証 */
+    padding: 8px 12px !important; /* 統一されたパディング */
+    margin: 2px 0 !important; /* 統一されたマージン */
+    font-size: 14px !important; /* 統一されたフォントサイズ */
+    line-height: 1.2 !important; /* 統一された行間 */
+    min-height: auto !important; /* 高さ自動調整 */
 }
 
 input[type="text"] {
