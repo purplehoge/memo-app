@@ -196,7 +196,8 @@ textarea:focus {
     flex: 1;
     min-width: 75px; /* 「📅 日付付加」が1行表示されるよう最小幅を調整 */
     white-space: nowrap;
-    font-size: 14px; /* フォントサイズを微調整 */
+    font-size: 14px;
+    padding: 8px 12px; /* テンプレート列と高さを合わせるためパディング調整 */
 }
 
 .template-section h3 {
@@ -443,6 +444,8 @@ textarea:focus {
     flex: 1; /* 4つのボタンを均等配置 */
     min-width: 45px; /* 最小幅を設定して一行表示を保証 */
     white-space: nowrap; /* テキストの改行を防止 */
+    font-size: 14px; /* メモ列と統一 */
+    padding: 8px 12px; /* メモ列と高さを合わせるためパディング調整 */
 }
 
 input[type="text"] {
