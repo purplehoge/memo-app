@@ -184,8 +184,18 @@ textarea:focus {
 
 .memo-controls {
     display: flex;
-    gap: 10px;
+    gap: 4px;
     margin-bottom: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.memo-controls .btn {
+    margin: 2px 0;
+    line-height: 1.2;
+    flex: 1;
+    min-width: 65px; /* メモボタン用の最小幅 */
+    white-space: nowrap;
 }
 
 .template-section h3 {
