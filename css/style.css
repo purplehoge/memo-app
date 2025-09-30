@@ -706,22 +706,24 @@ input[type="text"]:focus {
         width: 350px;
     }
 
-    /* デスクトップ: 310px幅で3列表示対応 */
+    /* デスクトップ: 3列表示に最適化 */
     .selected-template-boxes {
-        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)) !important;
-        gap: 8px !important;
+        grid-template-columns: repeat(3, 1fr) !important; /* 固定3列 */
+        gap: 16px !important;
     }
 
     .template-box-container {
-        min-width: 90px !important;
+        min-width: 280px !important; /* 適切な表示幅 */
+        max-width: 350px !important; /* 最大幅制限 */
+        width: auto !important;
     }
 
     .template-box-btn {
-        min-width: 20px !important; /* 狭い幅でも4ボタン収納 */
-        max-width: 30px !important;
-        padding: 4px 2px !important;
-        font-size: 11px !important;
-        gap: 2px !important;
+        min-width: 60px !important; /* 読みやすいボタンサイズ */
+        min-height: 36px !important;
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        gap: 4px !important;
     }
 
     /* フォーカス表示を大きめに */
