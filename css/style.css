@@ -469,13 +469,14 @@ input[type="text"]:focus {
 
 .date-info {
     text-align: center;
-    padding: 12px;
-    background: var(--light-purple);
-    border-radius: 12px;
-    margin-bottom: 15px;
+    padding: 10px 14px; /* テンプレート名入力欄と同じパディング */
+    background: rgba(255, 255, 255, 0.8); /* テンプレート名入力欄と同じ背景 */
+    border-radius: 8px; /* テンプレート名入力欄と同じ角丸 */
+    margin-bottom: 10px; /* テンプレート名入力欄と同じマージン */
     font-weight: 600;
-    color: var(--primary-purple-dark);
-    border: 1px solid var(--border-purple);
+    font-size: 14px; /* テンプレート名入力欄と同じフォントサイズ */
+    color: var(--text-dark); /* テンプレート名入力欄と同じ文字色 */
+    border: 2px solid var(--border-purple); /* テンプレート名入力欄と同じボーダー */
 }
 
 /* スマートフォン（シニア対応強化） */
