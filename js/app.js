@@ -427,12 +427,14 @@ function addDateToMemo() {
     const dateStr = now.getFullYear() + '/' +
                    String(now.getMonth() + 1).padStart(2, '0') + '/' +
                    String(now.getDate()).padStart(2, '0');
-    
+
     const memoTextArea = document.getElementById('memoText');
     let currentContent = memoTextArea.value;
-    
+
+    // 本文が空の場合は日付のみを設定
     if (!currentContent.trim()) {
-        alert('メモの内容がありません');
+        memoTextArea.value = dateStr + '\n\n';
+        alert('📅 日付を追加しました: ' + dateStr);
         return;
     }
     
