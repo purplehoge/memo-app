@@ -194,8 +194,9 @@ textarea:focus {
     margin: 2px 0;
     line-height: 1.2;
     flex: 1;
-    min-width: 65px; /* メモボタン用の最小幅 */
+    min-width: 75px; /* 「📅 日付付加」が1行表示されるよう最小幅を調整 */
     white-space: nowrap;
+    font-size: 14px; /* フォントサイズを微調整 */
 }
 
 .template-section h3 {
