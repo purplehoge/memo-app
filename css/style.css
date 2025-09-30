@@ -622,7 +622,7 @@ input[type="text"]:focus {
     }
 
     .template-box-header {
-        font-size: var(--large-font-size);
+        font-size: 16px !important; /* 他のテンプレート名と統一 */
         margin-bottom: 12px;
     }
 
