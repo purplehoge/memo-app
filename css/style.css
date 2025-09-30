@@ -115,14 +115,16 @@ body {
     background: var(--primary-purple);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
-    margin: 5px;
+    margin: 2px 0;
     font-size: 14px;
     font-weight: 500;
+    line-height: 1.2;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+    white-space: nowrap;
 }
 
 .btn:hover {
@@ -191,13 +193,8 @@ textarea:focus {
 }
 
 .memo-controls .btn {
-    margin: 2px 0;
-    line-height: 1.2;
     flex: 1;
     min-width: 75px; /* 「📅 日付付加」が1行表示されるよう最小幅を調整 */
-    white-space: nowrap;
-    font-size: 14px;
-    padding: 8px 12px; /* テンプレート列と高さを合わせるためパディング調整 */
 }
 
 .template-section h3 {
@@ -439,13 +436,8 @@ textarea:focus {
 }
 
 .template-controls .btn {
-    margin: 2px 0; /* 縦のmarginを削減 */
-    line-height: 1.2; /* line-heightを調整 */
     flex: 1; /* 4つのボタンを均等配置 */
     min-width: 45px; /* 最小幅を設定して一行表示を保証 */
-    white-space: nowrap; /* テキストの改行を防止 */
-    font-size: 14px; /* メモ列と統一 */
-    padding: 8px 12px; /* メモ列と高さを合わせるためパディング調整 */
 }
 
 input[type="text"] {
