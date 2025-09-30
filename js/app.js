@@ -162,6 +162,52 @@ function toggleTemplateSelection(templateName) {
 }
 
 /**
+ * 全テンプレートを一括チェック
+ */
+function selectAllTemplates() {
+    const templateNames = Object.keys(templates);
+
+    if (templateNames.length === 0) {
+        alert('チェックするテンプレートがありません');
+        return;
+    }
+
+    // 全テンプレートをselectedTemplatesに追加
+    templateNames.forEach(name => {
+        selectedTemplates.add(name);
+    });
+
+    // 状態保存と表示更新
+    saveSelectedTemplates();
+    renderTemplateList();
+    renderSelectedTemplateBoxes();
+
+    alert(`☑️ ${templateNames.length}個のテンプレートを一括チェックしました`);
+}
+
+/**
+ * 全テンプレートのチェックを一括解除
+ */
+function clearAllTemplates() {
+    if (selectedTemplates.size === 0) {
+        alert('チェックを解除するテンプレートがありません');
+        return;
+    }
+
+    const previousCount = selectedTemplates.size;
+
+    // 全選択状態をクリア
+    selectedTemplates.clear();
+
+    // 状態保存と表示更新
+    saveSelectedTemplates();
+    renderTemplateList();
+    renderSelectedTemplateBoxes();
+
+    alert(`☐ ${previousCount}個のテンプレートのチェックを一括解除しました`);
+}
+
+/**
  * 選択済みテンプレートのテキストボックス群を描画する
  */
 function renderSelectedTemplateBoxes() {

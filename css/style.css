@@ -424,6 +424,19 @@ textarea:focus {
     margin-top: 15px;
 }
 
+.bulk-selection-controls {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.bulk-selection-controls .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    flex: 1;
+}
+
 input[type="text"] {
     width: 100%;
     padding: 10px 14px;
