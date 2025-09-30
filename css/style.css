@@ -422,19 +422,14 @@ textarea:focus {
     display: flex;
     gap: 5px;
     margin-top: 15px;
+    flex-wrap: wrap;
 }
 
-.bulk-selection-controls {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
-.bulk-selection-controls .btn {
-    font-size: 12px;
-    padding: 6px 12px;
-    flex: 1;
+.template-controls .btn-small {
+    font-size: 11px;
+    padding: 6px 8px;
+    min-width: auto;
+    flex: none;
 }
 
 input[type="text"] {
