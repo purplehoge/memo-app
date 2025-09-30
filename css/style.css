@@ -104,11 +104,14 @@ body {
     flex-direction: column;
 }
 
+.template-section h3,
+.memo-area h3,
 .selected-templates-area h3 {
-    color: var(--primary-purple-dark);
-    margin-bottom: 20px;
     margin-top: 0;
-    font-size: var(--header-font-size);
+    margin-bottom: 15px;
+    color: var(--primary-purple-dark);
+    font-weight: 600;
+    font-size: 18px; /* 統一されたフォントサイズ */
 }
 
 .btn {
@@ -202,13 +205,6 @@ textarea:focus {
     min-height: auto !important; /* 高さ自動調整 */
 }
 
-.template-section h3,
-.memo-area h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: var(--primary-purple-dark);
-    font-weight: 600;
-}
 
 .template-list {
     max-height: 600px;
@@ -271,6 +267,7 @@ textarea:focus {
 
 .template-name {
     font-weight: bold;
+    font-size: 16px; /* 選択済みテンプレートボックスと統一 */
     margin-bottom: 5px;
     cursor: pointer;
     flex: 1;
@@ -314,7 +311,7 @@ textarea:focus {
 .template-box-header {
     margin: 0 0 10px 0;
     color: var(--primary-purple-dark);
-    font-size: 14px;
+    font-size: 16px; /* テンプレート名と統一 */
     font-weight: 600;
     border-bottom: 1px solid var(--border-purple);
     padding-bottom: 8px;
