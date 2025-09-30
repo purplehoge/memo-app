@@ -202,7 +202,8 @@ textarea:focus {
     min-height: auto !important; /* 高さ自動調整 */
 }
 
-.template-section h3 {
+.template-section h3,
+.memo-area h3 {
     margin-top: 0;
     margin-bottom: 15px;
     color: var(--primary-purple-dark);
