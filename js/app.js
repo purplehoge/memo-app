@@ -422,6 +422,10 @@ function deleteTemplate() {
     );
 }
 
+/**
+ * メモエリアに日付を付与する機能
+ * 本文が空の場合でも日付を追加可能
+ */
 function addDateToMemo() {
     const now = new Date();
     const dateStr = now.getFullYear() + '/' +
@@ -431,21 +435,21 @@ function addDateToMemo() {
     const memoTextArea = document.getElementById('memoText');
     let currentContent = memoTextArea.value;
 
-    // 本文が空の場合は日付のみを設定
-    if (!currentContent.trim()) {
+    // 本文が空の場合は日付のみを設定（最優先処理）
+    if (!currentContent || currentContent.trim() === '') {
         memoTextArea.value = dateStr + '\n\n';
         alert('📅 日付を追加しました: ' + dateStr);
         return;
     }
-    
+
     // mm/dd形式の日付を当日の月/日で置換（0埋めなし）
     const monthDay = String(now.getMonth() + 1) + '/' + String(now.getDate());
     // mm/ddのリテラル文字列のみ置換（独立した単語として存在する場合のみ）
     let mmddReplaced = currentContent.replace(/(?:^|(?<=\s))mm\/dd(?=\s|$)/gm, monthDay);
-    
+
     // yyyy/mm/dd形式の完全パターン置換
     let updatedContent = mmddReplaced.replace(/(?:^|(?<=\s))yyyy\/mm\/dd(?=\s|$)/gm, dateStr);
-    
+
     if (mmddReplaced !== currentContent) {
         // mm/dd形式が見つかった場合
         memoTextArea.value = updatedContent;
