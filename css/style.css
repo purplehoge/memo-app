@@ -430,7 +430,8 @@ textarea:focus {
     margin: 2px 0; /* 縦のmarginを削減 */
     line-height: 1.2; /* line-heightを調整 */
     flex: 1; /* 4つのボタンを均等配置 */
-    min-width: 0; /* flex縮小を許可 */
+    min-width: 45px; /* 最小幅を設定して一行表示を保証 */
+    white-space: nowrap; /* テキストの改行を防止 */
 }
 
 input[type="text"] {
