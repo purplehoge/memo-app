@@ -450,11 +450,6 @@ textarea:focus {
 
 input[type="text"] {
     width: 100%;
-    padding: 10px 14px;
-    border: 2px solid var(--border-purple);
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
     background: rgba(255, 255, 255, 0.8);
     color: var(--text-dark);
     transition: all 0.3s ease;
@@ -467,16 +462,20 @@ input[type="text"]:focus {
     background: rgba(255, 255, 255, 1);
 }
 
+/* サイズ統一用の共通クラス */
+.uniform-input-size {
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 2px solid var(--border-purple);
+}
+
 .date-info {
     text-align: center;
-    padding: 10px 14px; /* テンプレート名入力欄と同じパディング */
-    background: rgba(255, 255, 255, 0.8); /* テンプレート名入力欄と同じ背景 */
-    border-radius: 8px; /* テンプレート名入力欄と同じ角丸 */
-    margin-bottom: 10px; /* テンプレート名入力欄と同じマージン */
+    background: var(--light-purple); /* 元の色に戻す */
     font-weight: 600;
-    font-size: 14px; /* テンプレート名入力欄と同じフォントサイズ */
-    color: var(--text-dark); /* テンプレート名入力欄と同じ文字色 */
-    border: 2px solid var(--border-purple); /* テンプレート名入力欄と同じボーダー */
+    color: var(--primary-purple-dark); /* 元の色に戻す */
 }
 
 /* スマートフォン（シニア対応強化） */
