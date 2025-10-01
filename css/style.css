@@ -212,6 +212,7 @@ textarea:focus {
     border: 2px solid var(--border-purple);
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.9);
+    margin-top: 15px; /* メモテキストエリアと位置を合わせる */
 }
 
 .template-item {
@@ -433,7 +434,7 @@ textarea:focus {
 .template-controls {
     display: flex;
     gap: 4px;
-    margin-top: 5px; /* メモコントロールと位置を揃えるため調整 */
+    margin-top: 0px; /* メモコントロールと位置を完全に揃える */
     flex-wrap: wrap;
     align-items: center;
 }
