@@ -433,7 +433,7 @@ textarea:focus {
 .template-controls {
     display: flex;
     gap: 4px;
-    margin-top: 15px;
+    margin-top: 5px; /* メモコントロールと位置を揃えるため調整 */
     flex-wrap: wrap;
     align-items: center;
 }
@@ -476,6 +476,8 @@ input[type="text"]:focus {
     background: var(--light-purple); /* 元の色に戻す */
     font-weight: 600;
     color: var(--primary-purple-dark); /* 元の色に戻す */
+    line-height: 1.2; /* テンプレート名入力欄と同じline-height */
+    min-height: 20px; /* 内容の高さを確保 */
 }
 
 /* スマートフォン（シニア対応強化） */
