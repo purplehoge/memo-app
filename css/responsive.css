@@ -1,0 +1,282 @@
+/**
+ * レスポンシブ対応スタイル
+ * モバイル、タブレット、デスクトップ環境での表示最適化
+ */
+
+/* スマートフォン（シニア対応強化） */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+        font-size: var(--base-font-size);
+        font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-high-contrast);
+    }
+
+    .container {
+        border-radius: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    .header h1 {
+        font-size: 22px;
+        padding: 16px;
+    }
+
+    .main-content {
+        flex-direction: column;
+        min-height: 60vh;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid var(--border-purple);
+        order: 1; /* テンプレート選択を上部に */
+        padding: 16px;
+    }
+
+    .memo-area {
+        width: 100%; /* モバイルでは全幅に戻す */
+        order: 2;
+        padding: 16px;
+        border-right: none;
+        border-bottom: 2px solid var(--border-purple);
+    }
+
+    .selected-templates-area {
+        width: 100%;
+        order: 3; /* 選択済みテンプレートを最下部に */
+        padding: 16px;
+    }
+
+    /* シニア向け大きなタッチターゲット */
+    .btn {
+        min-height: var(--mobile-button-height);
+        font-size: var(--button-font-size);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        padding: 16px 24px;
+        margin: 8px 4px;
+    }
+
+    .btn:focus {
+        outline: var(--focus-outline-width) solid var(--focus-outline-color);
+        outline-offset: 2px;
+    }
+
+    input[type="text"] {
+        min-height: var(--mobile-input-height);
+        padding: 16px;
+        font-size: var(--base-font-size);
+        background: var(--background-high-contrast);
+        color: var(--text-high-contrast);
+    }
+
+    input[type="text"]:focus {
+        outline: var(--focus-outline-width) solid var(--focus-outline-color);
+        outline-offset: 2px;
+    }
+
+    textarea {
+        height: 300px;
+        font-size: var(--base-font-size);
+        padding: 16px;
+        font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', monospace;
+        line-height: 1.6;
+        background: var(--background-high-contrast);
+        color: var(--text-high-contrast);
+    }
+
+    textarea:focus {
+        outline: var(--focus-outline-width) solid var(--focus-outline-color);
+        outline-offset: 2px;
+    }
+
+    .memo-controls {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .template-item {
+        padding: 16px;
+        font-size: var(--base-font-size);
+    }
+
+    .template-name {
+        font-size: var(--large-font-size);
+        margin-bottom: 8px;
+    }
+
+    .template-preview {
+        font-size: var(--base-font-size);
+        color: var(--text-medium);
+    }
+
+    /* チェックボックス関連のモバイル対応 */
+    .template-checkbox-label {
+        gap: 16px;
+        min-height: var(--mobile-button-height);
+    }
+
+    .template-checkbox {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* 選択済みテンプレートボックスのモバイル対応 */
+    .selected-templates-area h3 {
+        font-size: var(--header-font-size);
+        margin-bottom: 16px;
+    }
+
+    .selected-template-boxes {
+        display: grid !important;
+        grid-template-columns: 1fr !important; /* モバイルでは1列 */
+        gap: 16px !important;
+    }
+
+    .template-box-container {
+        width: 100%; /* モバイルでは全幅 */
+        max-width: none;
+        padding: 16px;
+        margin-bottom: 0;
+        min-height: auto;
+    }
+
+    .template-box-header {
+        font-size: 16px !important; /* 他のテンプレート名と統一 */
+        margin-bottom: 12px;
+    }
+
+    .template-box-textarea {
+        min-height: 150px;
+        padding: 16px;
+        font-size: var(--base-font-size);
+        line-height: 1.6;
+    }
+
+    .template-box-textarea:focus {
+        outline: var(--focus-outline-width) solid var(--focus-outline-color);
+        outline-offset: 2px;
+    }
+
+    .template-box-buttons {
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .template-box-btn {
+        min-width: 140px;
+        min-height: var(--mobile-button-height);
+        padding: 16px 20px;
+        font-size: var(--button-font-size);
+        font-weight: 600;
+        letter-spacing: 0.02em;
+    }
+
+    .template-box-btn:focus {
+        outline: var(--focus-outline-width) solid var(--focus-outline-color);
+        outline-offset: 2px;
+    }
+}
+
+/* レスポンシブグリッドレイアウト: タブレット・デスクトップ対応 */
+@media (min-width: 769px) {
+    /* グリッドレイアウトの継続使用 */
+    .selected-templates-area .selected-template-boxes,
+    #selectedTemplateBoxes,
+    div.selected-template-boxes {
+        display: grid !important;
+    }
+
+    /* タブレット: 最大3列表示 */
+    .selected-template-boxes {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+        gap: 10px !important;
+    }
+
+    /* テンプレートボックス: 可変幅対応 */
+    .template-box-container {
+        width: auto !important; /* グリッド自動調整 */
+        min-width: 140px !important; /* タブレット用最小幅 */
+        max-width: none !important; /* 最大幅制限解除 */
+    }
+
+    /* ボタンサイズ最適化 */
+    .template-box-btn {
+        min-width: 28px !important;
+        min-height: 32px !important;
+        padding: 6px 3px !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        border-radius: 4px !important;
+        flex: 1 !important;
+    }
+
+    .template-box-buttons {
+        flex-wrap: nowrap !important;
+        gap: 3px !important;
+    }
+}
+
+/* タブレット */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .main-content {
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 300px;
+    }
+
+    /* タッチターゲットサイズ維持 */
+    .btn {
+        min-height: var(--min-touch-target);
+    }
+
+    input[type="text"], textarea {
+        font-size: var(--base-font-size);
+    }
+}
+
+/* 大画面でのアクセシビリティ配慮 - 左詰めレイアウト */
+@media (min-width: 1025px) {
+    .main-content {
+        max-width: none;         /* 幅制限解除 */
+        margin: 0 0 0 20px;      /* 左余白のみ */
+        padding-right: 20px;     /* 右余白 */
+    }
+
+    .sidebar {
+        width: 350px;
+    }
+
+    /* デスクトップ: 3列表示に最適化 */
+    .selected-template-boxes {
+        grid-template-columns: repeat(3, 1fr) !important; /* 固定3列 */
+        gap: 16px !important;
+    }
+
+    .template-box-container {
+        min-width: 280px !important; /* 適切な表示幅 */
+        max-width: 350px !important; /* 最大幅制限 */
+        width: auto !important;
+    }
+
+    .template-box-btn {
+        min-width: 60px !important; /* 読みやすいボタンサイズ */
+        min-height: 36px !important;
+        padding: 8px 12px !important;
+        font-size: 12px !important;
+        gap: 4px !important;
+    }
+
+    /* フォーカス表示を大きめに */
+    .btn:focus, input:focus, textarea:focus {
+        outline-width: var(--focus-outline-width);
+    }
+}

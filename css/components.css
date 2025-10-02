@@ -1,0 +1,320 @@
+/**
+ * コンポーネント別スタイル定義
+ * ボタン、テンプレート、選択済みテンプレートボックスなどの個別コンポーネントスタイル
+ */
+
+/* ボタン共通スタイル */
+.btn {
+    background: var(--primary-purple);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 2px 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: var(--primary-purple-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.btn-success {
+    background: var(--success-color);
+    box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+}
+
+.btn-success:hover {
+    background: var(--success-hover);
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+}
+
+.btn-danger:hover {
+    background: var(--danger-hover);
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    box-shadow: 0 2px 8px rgba(128, 90, 213, 0.3);
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-hover);
+    box-shadow: 0 4px 12px rgba(128, 90, 213, 0.4);
+}
+
+/* メモコントロール */
+.memo-controls {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.memo-controls .btn {
+    flex: 1;
+    min-width: 75px !important; /* 「📅 日付付加」が1行表示されるよう最小幅を調整 */
+    padding: 8px 12px !important; /* 統一されたパディング */
+    margin: 2px 0 !important; /* 統一されたマージン */
+    font-size: 14px !important; /* 統一されたフォントサイズ */
+    line-height: 1.2 !important; /* 統一された行間 */
+    min-height: auto !important; /* 高さ自動調整 */
+}
+
+/* テンプレートコントロール */
+.template-controls {
+    display: flex;
+    gap: 4px;
+    margin-top: 0px; /* メモコントロールと位置を完全に揃える */
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.template-controls .btn {
+    flex: 1; /* 4つのボタンを均等配置 */
+    min-width: 45px !important; /* 最小幅を設定して一行表示を保証 */
+    padding: 8px 12px !important; /* 統一されたパディング */
+    margin: 2px 0 !important; /* 統一されたマージン */
+    font-size: 14px !important; /* 統一されたフォントサイズ */
+    line-height: 1.2 !important; /* 統一された行間 */
+    min-height: auto !important; /* 高さ自動調整 */
+}
+
+/* テンプレート一覧 */
+.template-list {
+    max-height: 600px;
+    overflow-y: auto;
+    border: 2px solid var(--border-purple);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    margin-top: 15px; /* メモテキストエリアと位置を合わせる */
+}
+
+.template-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--light-purple);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.template-item:hover {
+    background: var(--light-purple);
+    transform: translateX(4px);
+}
+
+.template-item:last-child {
+    border-bottom: none;
+}
+
+.template-item.selected {
+    background: #f5f5f5;
+    color: #333333;
+    border: 2px solid #555555;
+    box-shadow: 0 2px 8px rgba(85, 85, 85, 0.2);
+}
+
+.template-item.checked {
+    background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+    border-left: 4px solid var(--success-color);
+}
+
+/* チェックボックス関連 */
+.template-checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    min-height: var(--min-touch-target); /* シニア世代対応: 48px以上のタッチターゲット */
+    min-width: 20px;
+}
+
+.template-content {
+    flex: 1;
+    cursor: pointer;
+}
+
+.template-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--success-color);
+}
+
+.template-name {
+    font-weight: bold;
+    font-size: 16px; /* 選択済みテンプレートボックスと統一 */
+    margin-bottom: 5px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.template-preview {
+    font-size: 12px;
+    color: var(--text-medium);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 32px; /* チェックボックス分のインデント */
+}
+
+/* 選択済みテンプレートボックス */
+.selected-template-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 現実的な最小幅 */
+    gap: 12px;
+    flex: 1;
+    overflow-y: auto;
+    align-content: start;
+}
+
+/* テンプレートボックス */
+.template-box-container {
+    border: 2px solid var(--border-purple);
+    border-radius: 8px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto; /* 固有サイズを維持 */
+    width: 280px; /* 適切な幅を設定 */
+    max-width: 320px; /* 最大幅制限 */
+}
+
+.template-box-header {
+    margin: 0 0 10px 0;
+    color: var(--primary-purple-dark);
+    font-size: 16px; /* テンプレート名と統一 */
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-purple);
+    padding-bottom: 8px;
+    flex-shrink: 0;
+}
+
+.template-box-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid var(--border-purple);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', monospace;
+    resize: vertical;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-high-contrast);
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.template-box-textarea:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: 2px;
+    border-color: var(--primary-purple);
+    background: var(--background-high-contrast);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* テンプレートボックスボタン */
+.template-box-buttons {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+    flex-wrap: nowrap; /* ボタンを1行に強制 */
+    flex-shrink: 0;
+    justify-content: space-between; /* ボタン間の間隔を均等配分 */
+}
+
+.template-box-btn {
+    min-width: 60px;
+    min-height: 36px;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.template-box-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.template-box-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.template-box-btn:focus {
+    outline: var(--focus-outline-width) solid var(--focus-outline-color);
+    outline-offset: 2px;
+}
+
+/* 既存ボタンスタイルとの統一 */
+.template-box-btn.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(128, 90, 213, 0.3);
+}
+
+.template-box-btn.btn-secondary:hover {
+    background: var(--secondary-hover);
+    box-shadow: 0 4px 12px rgba(128, 90, 213, 0.4);
+}
+
+.template-box-btn.btn-primary {
+    background: var(--primary-purple);
+    color: white;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.template-box-btn.btn-primary:hover {
+    background: var(--primary-purple-dark);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+}
+
+.template-box-btn.btn-success {
+    background: var(--success-color);
+    color: white;
+    box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+}
+
+.template-box-btn.btn-success:hover {
+    background: var(--success-hover);
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+}
+
+.template-box-btn.btn-danger {
+    background: #e53e3e;
+    color: white;
+    box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+}
+
+.template-box-btn.btn-danger:hover {
+    background: #c53030;
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4);
+}
