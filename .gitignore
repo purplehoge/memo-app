@@ -65,3 +65,8 @@ temp/
 
 # Old project files - 旧プロジェクトファイル
 oldpjt/
+
+# Test reports and development files - テストレポートと開発ファイル
+*test_report.txt
+*_test_report.txt
+scripts/
