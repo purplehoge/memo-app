@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>メモ帳アプリ</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS読み込み（変数→基本→コンポーネント→レスポンシブの順序） -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
     <div class="container">
@@ -55,6 +59,12 @@
         </div>
     </div>
 
-    <script src="js/app.js"></script>
+    <!-- JavaScript読み込み（設定→データ→機能別の順序） -->
+    <script src="js/config.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/selectedTemplates.js"></script>
+    <script src="js/memo.js"></script>
+    <script src="js/ui.js"></script>
 </body>
 </html>

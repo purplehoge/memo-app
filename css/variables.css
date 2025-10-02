@@ -1,0 +1,41 @@
+/**
+ * CSS変数定義
+ * アプリケーション全体で使用する配色、サイズ、設定値を一元管理
+ */
+
+:root {
+    /* 紫テーマの配色変数 */
+    --primary-purple: #8b5cf6;
+    --primary-purple-dark: #7c3aed;
+    --secondary-purple: #a78bfa;
+    --light-purple: #e9d5ff;
+    --very-light-purple: #f3e8ff;
+    --purple-gray: #f8fafc;
+    --border-purple: #d8b4fe;
+    --text-dark: #4a5568;
+    --text-medium: #718096;
+    --text-light: #a0aec0;
+    --success-color: #48bb78;
+    --success-hover: #38a169;
+    --danger-color: #e53e3e;
+    --danger-hover: #c53030;
+    --secondary-color: #805ad5;
+    --secondary-hover: #6b46c1;
+
+    /* シニア世代対応設定 */
+    --base-font-size: 16px;
+    --large-font-size: 18px;
+    --button-font-size: 18px;
+    --header-font-size: 24px;
+    --min-touch-target: 48px;
+    --mobile-button-height: 56px;
+    --mobile-input-height: 48px;
+    --high-contrast-ratio: 4.5; /* WCAG AA準拠 */
+    --hover-transition: 0.2s ease;
+    --focus-outline-color: #f59e0b;
+    --focus-outline-width: 3px;
+
+    /* 高コントラスト色（WCAG AA準拠） */
+    --text-high-contrast: #1a1a1a;
+    --background-high-contrast: #ffffff;
+}
