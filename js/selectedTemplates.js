@@ -120,7 +120,7 @@ function addDateToTemplateBox(templateName) {
         if (hasExistingDate) {
             alert('既存の日付が検出されたため、日付の追加は行いません');
         } else {
-            const finalContent = `${dateStr}\n\n${currentContent}`;
+            const finalContent = `${dateStr}\n${currentContent}`;
             textArea.value = finalContent;
             alert(`${templateName}の先頭に日付を追加しました: ${dateStr}`);
         }

@@ -18,7 +18,7 @@ function addDateToMemo() {
 
     // 本文が空の場合は日付のみを設定（最優先処理）
     if (!currentContent || currentContent.trim() === '') {
-        memoTextArea.value = dateStr + '\n\n';
+        memoTextArea.value = dateStr;
         alert('📅 日付を追加しました: ' + dateStr);
         return;
     }
@@ -49,7 +49,7 @@ function addDateToMemo() {
             alert('既存の日付が検出されたため、日付の追加は行いません');
         } else {
             // 日付がない場合のみ、先頭に日付を付加
-            const finalContent = `${dateStr}\n\n${currentContent}`;
+            const finalContent = `${dateStr}\n${currentContent}`;
             memoTextArea.value = finalContent;
             alert('先頭に日付を追加しました: ' + dateStr);
         }
@@ -65,7 +65,7 @@ function newMemo() {
                    String(now.getMonth() + 1).padStart(2, '0') + DATE_CONFIG.DATE_SEPARATOR +
                    String(now.getDate()).padStart(2, '0');
 
-    document.getElementById('memoText').value = `${dateStr}\n\n`;
+    document.getElementById('memoText').value = dateStr;
     document.getElementById('templateName').value = '';
     selectedTemplate = null;
     renderTemplateList();
