@@ -429,16 +429,20 @@ function deleteTemplateFromBox(templateName) {
 function saveTemplate() {
     const name = document.getElementById('templateName').value.trim();
     const content = document.getElementById('memoText').value;
-    
+
     if (!name) {
         alert('テンプレート名を入力してください');
         return;
     }
-    
+
     templates[name] = content;
     saveTemplates();
     selectedTemplate = name;
     renderTemplateList();
+
+    // 選択済みテンプレートボックスも更新する
+    renderSelectedTemplateBoxes();
+
     alert('テンプレートを保存しました: ' + name);
 }
 
@@ -447,18 +451,27 @@ function deleteTemplate() {
         alert('削除するテンプレートを選択してください');
         return;
     }
-    
+
     const templateName = selectedTemplate;
     showSeniorConfirmDialog(
         `テンプレート「${templateName}」を削除しますか？\n\nこの操作は取り消すことができません。`,
         () => {
             // 削除実行
             delete templates[templateName];
+
+            // 選択状態からも削除
+            selectedTemplates.delete(templateName);
+
             saveTemplates();
+            saveSelectedTemplates();
             selectedTemplate = null;
             document.getElementById('templateName').value = '';
             document.getElementById('memoText').value = '';
             renderTemplateList();
+
+            // 選択済みテンプレートボックスも更新する
+            renderSelectedTemplateBoxes();
+
             alert('テンプレートを削除しました');
         },
         () => {
