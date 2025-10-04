@@ -130,10 +130,20 @@ index.html をブラウザで開く
 ### ファイル構成
 ```
 ├── index.html       # メインHTMLファイル
-├── css/
-│   └── style.css    # スタイルシート
-├── js/
-│   └── app.js       # アプリケーションロジック
+├── css/             # スタイルシート（分割済み）
+│   ├── variables.css    # CSS変数・配色定義
+│   ├── base.css         # 基本スタイル・レイアウト
+│   ├── components.css   # コンポーネント別スタイル
+│   ├── responsive.css   # レスポンシブ対応
+│   └── style.css        # 分割済み（移行用コメント）
+├── js/              # アプリケーションロジック（分割済み）
+│   ├── config.js        # 設定・定数
+│   ├── storage.js       # データ管理
+│   ├── template.js      # テンプレート管理
+│   ├── selectedTemplates.js # 選択済みテンプレート管理
+│   ├── memo.js          # メモ機能
+│   ├── ui.js            # UI・アクセシビリティ
+│   └── app.js           # 分割済み（移行用コメント）
 ├── docs/
 │   ├── 01_要件定義.md
 │   ├── 02_基本設計.md
@@ -156,22 +166,42 @@ index.html をブラウザで開く
 
 ### ファイル構造
 ```
-index.html
-├─ HTML: アプリケーション構造
-├─ css/style.css: スタイリング（Flexboxベース）
-└─ js/app.js: アプリケーションロジック
+index.html: HTMLメイン構造
+├── css/（スタイルシート・分割済み）
+│   ├── variables.css: CSS変数・配色定義
+│   ├── base.css: 基本スタイル・レイアウト
+│   ├── components.css: コンポーネント別スタイル
+│   └── responsive.css: レスポンシブ対応
+└── js/（アプリケーションロジック・分割済み）
+    ├── config.js: 設定・定数
+    ├── storage.js: データ管理
+    ├── template.js: テンプレート管理
+    ├── selectedTemplates.js: 選択済みテンプレート管理
+    ├── memo.js: メモ機能
+    └── ui.js: UI・アクセシビリティ
 ```
 
 ### 主要な関数
-- `saveTemplate()`: テンプレート保存
-- `copyFromTemplate()`: テンプレートコピー
-- `newMemo()`: 新規メモ作成
-- `renderTemplateList()`: UI更新
+- **テンプレート管理** (`template.js`):
+  - `saveTemplate()`: テンプレート保存
+  - `deleteTemplate()`: テンプレート削除
+  - `renderTemplateList()`: テンプレート一覧描画
+- **メモ機能** (`memo.js`):
+  - `newMemo()`: 新規メモ作成
+  - `addDateToMemo()`: 日付付加
+  - `copyToClipboard()`: クリップボードコピー
+- **選択済みテンプレート** (`selectedTemplates.js`):
+  - `renderSelectedTemplateBoxes()`: 選択済みボックス描画
+  - `copyTemplateToClipboard()`: テンプレートコピー
+- **データ管理** (`storage.js`):
+  - `loadTemplates()`: テンプレート読み込み
+  - `saveTemplates()`: テンプレート保存
 
 ### カスタマイズポイント
-- **色テーマ**: CSS変数で一括変更可能
-- **日付形式**: JavaScript内の形式文字列変更
-- **レイアウト**: CSS Flexboxで調整
+- **色テーマ**: `css/variables.css`のCSS変数で一括変更可能
+- **日付形式**: `js/config.js`の`DATE_CONFIG`で設定変更
+- **レイアウト**: `css/base.css`のFlexboxレイアウト調整
+- **アクセシビリティ**: `js/config.js`の`ACCESSIBILITY_CONFIG`で設定
 
 ## ライセンス
 
